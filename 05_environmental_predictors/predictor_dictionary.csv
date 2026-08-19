@@ -1,0 +1,89 @@
+column_name,readable_name,scientific_family,units,transformation,primary_or_sensitivity,external_predictor,leakage_risk,reason,missing_percentage,expected_role
+company,Water company,identifier_or_target,n/a,n/a,sensitivity,True,False,contextual E+C sensitivity only,0.0,sensitivity
+uwwCode,Uwwcode,identifier_or_target,n/a,n/a,identifier,False,False,identifier excluded from predictors,0.0,identifier
+canonical_wwtw_name,Canonical Wwtw Name,identifier_or_target,n/a,n/a,identifier,False,False,identifier excluded from predictors,0.0,identifier
+wwtw_easting,Wwtw Easting,identifier_or_target,n/a,n/a,validation,False,False,spatial robustness only; never a predictor,0.0,validation
+wwtw_northing,Wwtw Northing,identifier_or_target,n/a,n/a,validation,False,False,spatial robustness only; never a predictor,0.0,validation
+wwtw_longitude,Wwtw Longitude,identifier_or_target,n/a,n/a,validation,False,False,spatial robustness only; never a predictor,0.0,validation
+wwtw_latitude,Wwtw Latitude,identifier_or_target,n/a,n/a,validation,False,False,spatial robustness only; never a predictor,0.0,validation
+sewershed_area_km2,WWTW catchment area,catchment_area,km2,log1p then standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+final_assignment_status,Final Assignment Status,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+assignment_source,Assignment Source,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+sensor_uid,Sensor Uid,identifier_or_target,n/a,n/a,identifier,False,True,identifier excluded from predictors,0.0,identifier
+permit_number,Permit Number,identifier_or_target,n/a,n/a,identifier,False,True,identifier excluded from predictors,0.0,identifier
+sensor_location_name,Sensor Location Name,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+sensor_easting,Sensor Easting,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+sensor_northing,Sensor Northing,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+sensor_longitude,Sensor Longitude,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+sensor_latitude,Sensor Latitude,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+fitted_beta,Fitted Beta,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,33.46872461413485,excluded
+beta_ci_lower_95,Beta Ci Lower 95,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,46.38505280259951,excluded
+beta_ci_upper_95,Beta Ci Upper 95,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,46.38505280259951,excluded
+beta_ci_width,Beta Ci Width,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,46.38505280259951,excluded
+eligible_for_beta_analysis,Eligible For Beta Analysis,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+beta_quality_status,Beta Quality Status,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+tail_event_count,Tail Event Count,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+fitted_lambda,Fitted Lambda,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,33.46872461413485,excluded
+lambda_ci_lower_95,Lambda Ci Lower 95,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,46.38505280259951,excluded
+lambda_ci_upper_95,Lambda Ci Upper 95,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,46.38505280259951,excluded
+spill_event_count,Spill Event Count,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.2437043054427295,excluded
+spill_total_duration_minutes,Spill Total Duration Minutes,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.2437043054427295,excluded
+spill_mean_duration_minutes,Spill Mean Duration Minutes,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.2437043054427295,excluded
+spill_median_duration_minutes,Spill Median Duration Minutes,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.2437043054427295,excluded
+monitoring_years,Monitoring Years,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,21.445978878960194,excluded
+spill_events_per_monitoring_year,Spill Events Per Monitoring Year,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,21.445978878960194,excluded
+spill_duration_minutes_per_monitoring_year,Spill Duration Minutes Per Monitoring Year,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,21.445978878960194,excluded
+load_entering_pe_latest,Load Entering Pe Latest,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+design_capacity_pe_latest,Design Capacity Pe Latest,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+capacity_ratio_latest,Treatment capacity utilisation,capacity_operations,ratio,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+capacity_data_year,Capacity Data Year,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+hydro_high_productivity_pct,High-productivity geology,hydrogeology,%,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+hydro_moderate_productivity_pct,Hydro Moderate Productivity Pct,identifier_or_target,n/a,n/a,reference,False,False,reference category prevents compositional singularity,0.0,reference
+hydro_low_productivity_pct,Low-productivity geology,hydrogeology,%,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+hydro_no_groundwater_pct,Essentially no groundwater,hydrogeology,%,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+hydro_intergranular_flow_pct,Intergranular-flow geology,hydrogeology,%,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+hydro_fracture_flow_pct,Hydro Fracture Flow Pct,identifier_or_target,n/a,n/a,reference,False,False,reference category prevents compositional singularity,0.0,reference
+hydro_valid_coverage_pct,Hydro Valid Coverage Pct,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+hydro_extraction_status,Hydro Extraction Status,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+rain_mean_annual_mm_1991_2020,Static mean annual rainfall,static_rainfall,mm/year,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+rain_winter_mean_mm_1991_2020,Static mean winter rainfall,static_rainfall,mm/winter,median impute + missing indicator + standardise,regularised,True,False,leakage-safe external predictor,0.0,regularised
+landcover_urban_pct,Landcover Urban Pct,identifier_or_target,n/a,n/a,sensitivity alternative,False,False,mathematically redundant with primary continuous developed-land representation,0.0,sensitivity alternative
+landcover_suburban_pct,Landcover Suburban Pct,identifier_or_target,n/a,n/a,sensitivity alternative,False,False,mathematically redundant with primary continuous developed-land representation,0.0,sensitivity alternative
+landcover_valid_coverage_pct,Landcover Valid Coverage Pct,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+population_estimate_2021,Population Estimate 2021,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+population_density_km2_2021,Population density,population,people/km2,log1p then standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+population_allocation_coverage_pct_2021,Population Allocation Coverage Pct 2021,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+building_pre_1973_pct,Pre-1973 building share,building_age,%,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+building_age_known_pct,Building Age Known Pct,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+building_age_spatial_coverage_pct,Building Age Spatial Coverage Pct,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+terrain_mean_slope_deg,Mean terrain slope,terrain,degrees,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+terrain_valid_coverage_pct,Terrain Valid Coverage Pct,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+continuous_land_cover_pct,Developed-land index,land_cover,%,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,0.0,primary
+rain_ann_prcptot_mm,Annual PRCPTOT,annual_dynamic_rainfall,mm/year,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,36.230706742485786,primary
+rain_ann_rx1day_mm,Annual Rx1day,annual_dynamic_rainfall,mm,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,36.230706742485786,primary
+rain_ann_rx5day_mm,Annual Rx5day,annual_dynamic_rainfall,mm,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,36.230706742485786,primary
+rain_ann_sdii_mm_per_wet_day,Annual SDII,annual_dynamic_rainfall,mm/wet day,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,36.230706742485786,primary
+rain_ann_r10_days,Annual R10 days,annual_dynamic_rainfall,days/year,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,36.230706742485786,primary
+rain_ann_r20_days,Annual R20 days,annual_dynamic_rainfall,days/year,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,36.230706742485786,primary
+rain_ann_cwd_days,Annual consecutive wet days,annual_dynamic_rainfall,days,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,36.230706742485786,primary
+rain_ann_cdd_days,Annual consecutive dry days,annual_dynamic_rainfall,days,median impute + missing indicator + standardise,primary,True,False,leakage-safe external predictor,36.230706742485786,primary
+rain_ann_n_valid_years,Rain Ann N Valid Years,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,36.230706742485786,excluded
+rain_ann_first_year,Rain Ann First Year,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,36.230706742485786,excluded
+rain_ann_last_year,Rain Ann Last Year,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,36.230706742485786,excluded
+rain_ann_coverage_fraction,Rain Ann Coverage Fraction,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,36.230706742485786,excluded
+rain_ann_quality_flag,Rain Ann Quality Flag,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,36.230706742485786,excluded
+primary_sensor_flag,Primary Sensor Flag,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+accepted_primary_pair,Accepted Primary Pair,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+lambda_at_optimizer_bound,Lambda At Optimizer Bound,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+has_beta,Has Beta,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+has_scale,Has Scale,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+has_duration,Has Duration,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+has_frequency,Has Frequency,identifier_or_target,n/a,n/a,excluded,False,False,not an approved scientifically distinct external predictor,0.0,excluded
+eligible_model_1,Eligible Model 1,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+eligible_model_2,Eligible Model 2,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+eligible_model_3,Eligible Model 3,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+eligible_model_4,Eligible Model 4,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+model_1_exclusion_reason,Model 1 Exclusion Reason,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+model_2_exclusion_reason,Model 2 Exclusion Reason,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+model_3_exclusion_reason,Model 3 Exclusion Reason,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded
+model_4_exclusion_reason,Model 4 Exclusion Reason,identifier_or_target,n/a,n/a,excluded,False,True,target-derived or target-quality leakage exclusion,0.0,excluded

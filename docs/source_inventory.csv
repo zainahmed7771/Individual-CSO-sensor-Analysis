@@ -1,0 +1,10 @@
+item,source_path,status,sha256,note
+Final internship report,PROJECT_RESULTS/Final Documents/CSO_Final_Report_Style_Preview.pdf,CURRENT,d9bf2fc4cd368322e6a8e4f1ba9d070f7fec572e6546c63f8692554045fa4fef,safe final PDF
+Original selected-sensor ML report,PROJECT_RESULTS/Final Documents/CSO_NEW_MACHINE_LEARNING_MODELS_1_TO_4_MASTER_REPORT_REDESIGNED.pdf,CURRENT,6c248eaa3eb4cdb611f86e4fdbf9423281088b34abe538f490bba9fffe8dabca,safe final PDF
+Regional-cluster ML report,REGIONAL_CLUSTER_AND_UNIVARIATE_ML/01_regional_cluster_model/report/CSO_REGIONAL_CLUSTER_MACHINE_LEARNING_REPORT.pdf,CURRENT extension,b7579ed1247746bef0dc656a7b75c53d706c6f9f9bae0bfeb5006d0bc04854bd,safe final PDF
+Scientific master,PROJECT_RESULTS/four_outcome_annual_nimrod_release_20260813_130420/data/scientific_master_annual_nimrod_v1.csv,CURRENT,0bcaef45d67862f1765791d37202c8571e2920ad3fcf8ce5894c756f1113317d,not copied: row-level sites/size
+Original ML master,machine learning/NEW MACHINE LEARNING/shared/new_ml_master.csv,CURRENT,965d3c5a683ec596432b18b2c8b6ab6dad8c8af53491b704e9d65e8282719f08,not copied: row-level sites
+Regional master,REGIONAL_CLUSTER_AND_UNIVARIATE_ML/01_regional_cluster_model/data/regional_master_25km.csv,CURRENT extension,f400e6121f4ff5bb4c32b2cb80e85b5452dbd41843fca58bc6d17e2ab1b84700,not copied: row-level geography
+Raw/clean EDM,clean_data/<company>/*.csv,RAW/PROTECTED,,not copied
+NIMROD archive,data_raw/dynamic_rainfall/,RAW/LARGE,,not copied
+Final presentation,not found,MISSING,,manual review required

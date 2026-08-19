@@ -1,0 +1,16 @@
+name: cso-spatial-drivers
+channels: [conda-forge]
+dependencies:
+  - python=3.12
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - scikit-learn
+  - statsmodels
+  - pyyaml
+  - pip
+  - pip:
+      - reportlab
+      - PyMuPDF
+      - pytest

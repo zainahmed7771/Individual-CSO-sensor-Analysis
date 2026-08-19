@@ -1,0 +1,327 @@
+GITHUB_RELEASE_CSO_SPATIAL_DRIVERS/
+|-- .github/
+|   `-- workflows/
+|       `-- tests.yml
+|-- 01_data_acquisition/
+|   |-- schemas/
+|   |   `-- README.md
+|   |-- scripts/
+|   |   |-- download_nimrod_1km.py
+|   |   `-- prepare_thames_company_data.py
+|   `-- README.md
+|-- 02_data_cleaning/
+|   |-- examples/
+|   |   `-- README.md
+|   |-- scripts/
+|   |   `-- prepare_sensor_master.py
+|   |-- tests/
+|   |   `-- test_event_contracts.py
+|   `-- README.md
+|-- 03_tail_parameter_fitting/
+|   |-- figures/
+|   |   `-- README.md
+|   |-- scripts/
+|   |   |-- analyse_individual_cso_heavy_tails.py
+|   |   `-- bootstrap_all_individual_cso_sensors.py
+|   |-- tests/
+|   |   `-- README.md
+|   |-- equations.md
+|   `-- README.md
+|-- 04_spatial_linkage/
+|   |-- figures/
+|   |   `-- README.md
+|   |-- scripts/
+|   |   |-- assign_sensors_to_catchments.py
+|   |   |-- build_final_manual_release.py
+|   |   |-- rebuild_name_matching.py
+|   |   `-- select_primary_sensor.py
+|   |-- tests/
+|   |   |-- test_08c_select_primary_wwtw_sensor_by_distance.py
+|   |   |-- test_assign_sensors_to_catchments.py
+|   |   `-- test_mapping_contracts.py
+|   |-- matching_config.json
+|   |-- matching_rules.md
+|   `-- README.md
+|-- 05_environmental_predictors/
+|   |-- figures/
+|   |   `-- README.md
+|   |-- scripts/
+|   |   |-- build_annual_nimrod_indices.py
+|   |   |-- build_sensor_environment_master.py
+|   |   |-- build_static_rainfall.py
+|   |   |-- build_wwtw_capacity.py
+|   |   `-- extract_hydrogeology.py
+|   |-- tests/
+|   |   `-- test_09_rainfall_characteristics.py
+|   |-- predictor_dictionary.csv
+|   `-- README.md
+|-- 06_univariate_analysis/
+|   |-- figures/
+|   |   `-- README.md
+|   |-- results/
+|   |   |-- all_variables_correlation_matrix.pdf
+|   |   |-- four_outcome_univariate_summary.csv
+|   |   `-- four_outcome_univariate_summary.pdf
+|   |-- scripts/
+|   |   |-- build_cross_outcome.py
+|   |   `-- build_four_outcome_analyses.py
+|   `-- README.md
+|-- 07_machine_learning/
+|   |-- configs/
+|   |   |-- original_selected_sensor/
+|   |   |   `-- model_1_beta.json
+|   |   `-- regional_cluster/
+|   |       `-- regional_experiment.json
+|   |-- figures/
+|   |   |-- original_selected_sensor/
+|   |   |   |-- beta_learning_curve.pdf
+|   |   |   |-- beta_learning_curve.png
+|   |   |   |-- beta_permutation_importance.pdf
+|   |   |   |-- beta_permutation_importance.png
+|   |   |   |-- beta_predicted_vs_observed.pdf
+|   |   |   |-- beta_predicted_vs_observed.png
+|   |   |   |-- duration_learning_curve.pdf
+|   |   |   |-- duration_learning_curve.png
+|   |   |   |-- duration_permutation_importance.pdf
+|   |   |   |-- duration_permutation_importance.png
+|   |   |   |-- duration_predicted_vs_observed.pdf
+|   |   |   |-- duration_predicted_vs_observed.png
+|   |   |   |-- frequency_learning_curve.pdf
+|   |   |   |-- frequency_learning_curve.png
+|   |   |   |-- frequency_permutation_importance.pdf
+|   |   |   |-- frequency_permutation_importance.png
+|   |   |   |-- frequency_predicted_vs_observed.pdf
+|   |   |   |-- frequency_predicted_vs_observed.png
+|   |   |   |-- lambda_learning_curve.pdf
+|   |   |   |-- lambda_learning_curve.png
+|   |   |   |-- lambda_permutation_importance.pdf
+|   |   |   |-- lambda_permutation_importance.png
+|   |   |   |-- lambda_predicted_vs_observed.pdf
+|   |   |   `-- lambda_predicted_vs_observed.png
+|   |   `-- regional_cluster/
+|   |       |-- beta_feature_importance.pdf
+|   |       |-- beta_feature_importance.png
+|   |       |-- beta_learning_curve.pdf
+|   |       |-- beta_learning_curve.png
+|   |       |-- beta_predicted_vs_observed.pdf
+|   |       |-- beta_predicted_vs_observed.png
+|   |       |-- cluster_radius_model_sensitivity.pdf
+|   |       |-- cluster_radius_model_sensitivity.png
+|   |       |-- duration_feature_importance.pdf
+|   |       |-- duration_feature_importance.png
+|   |       |-- duration_learning_curve.pdf
+|   |       |-- duration_learning_curve.png
+|   |       |-- duration_predicted_vs_observed.pdf
+|   |       |-- duration_predicted_vs_observed.png
+|   |       |-- frequency_feature_importance.pdf
+|   |       |-- frequency_feature_importance.png
+|   |       |-- frequency_learning_curve.pdf
+|   |       |-- frequency_learning_curve.png
+|   |       |-- frequency_predicted_vs_observed.pdf
+|   |       |-- frequency_predicted_vs_observed.png
+|   |       |-- lambda_feature_importance.pdf
+|   |       |-- lambda_feature_importance.png
+|   |       |-- lambda_learning_curve.pdf
+|   |       |-- lambda_learning_curve.png
+|   |       |-- lambda_predicted_vs_observed.pdf
+|   |       `-- lambda_predicted_vs_observed.png
+|   |-- models/
+|   |   |-- original_selected_sensor/
+|   |   |   |-- beta_final_model.joblib
+|   |   |   |-- duration_final_model.joblib
+|   |   |   |-- frequency_final_model.joblib
+|   |   |   `-- lambda_final_model.joblib
+|   |   `-- regional_cluster/
+|   |       |-- beta_final_model.joblib
+|   |       |-- duration_final_model.joblib
+|   |       |-- frequency_final_model.joblib
+|   |       `-- lambda_final_model.joblib
+|   |-- results/
+|   |   |-- original_selected_sensor/
+|   |   |   |-- beta_test_predictions.csv
+|   |   |   |-- duration_test_predictions.csv
+|   |   |   |-- four_model_summary.csv
+|   |   |   |-- frequency_test_predictions.csv
+|   |   |   `-- lambda_test_predictions.csv
+|   |   `-- regional_cluster/
+|   |       |-- beta_test_predictions.csv
+|   |       |-- duration_test_predictions.csv
+|   |       |-- four_model_summary.csv
+|   |       |-- frequency_test_predictions.csv
+|   |       |-- lambda_test_predictions.csv
+|   |       `-- old_wwtw_regional_comparison.csv
+|   |-- scripts/
+|   |   |-- original_selected_sensor/
+|   |   |   |-- build_cross_model_figures.py
+|   |   |   |-- finalize_release.py
+|   |   |   `-- ml_programme.py
+|   |   `-- regional_cluster/
+|   |       |-- 01_run_regional_analysis.py
+|   |       |-- 03_run_hierarchical_benchmark.py
+|   |       |-- 06_exact_event_medians_and_radius_models.py
+|   |       |-- 07_redesign_regional_report.py
+|   |       `-- RUN_ORDER.txt
+|   `-- README.md
+|-- 08_final_synthesis/
+|   |-- figures/
+|   |   |-- beta_log_lambda_relationship.pdf
+|   |   |-- beta_log_lambda_relationship.png
+|   |   |-- duration_frequency_univariate_forest.pdf
+|   |   |-- duration_frequency_univariate_forest.png
+|   |   |-- duration_tail_survival.pdf
+|   |   |-- duration_tail_survival.png
+|   |   |-- ml_learning_curves.pdf
+|   |   |-- ml_learning_curves.png
+|   |   |-- ml_predicted_vs_observed.pdf
+|   |   |-- ml_predicted_vs_observed.png
+|   |   |-- ml_predictor_importance.pdf
+|   |   |-- ml_predictor_importance.png
+|   |   |-- national_wwtw_overview.pdf
+|   |   |-- national_wwtw_overview.png
+|   |   |-- original_vs_regional_r2.pdf
+|   |   |-- original_vs_regional_r2.png
+|   |   |-- original_vs_regional_rmse_gain.pdf
+|   |   `-- original_vs_regional_rmse_gain.png
+|   |-- report_assets/
+|   |   `-- README.md
+|   |-- tables/
+|   |   `-- original_vs_regional_ml_scorecard.csv
+|   `-- README.md
+|-- 09_experimental_extensions/
+|   |-- hierarchical_benchmark/
+|   |   `-- summary.csv
+|   |-- univariate_ml/
+|   |   `-- all_univariate_results.csv
+|   `-- README.md
+|-- audit/
+|   |-- FINAL_COMPLETION_REPORT.txt
+|   |-- latex_compile_summary.json
+|   |-- test_summary.json
+|   `-- validation_results.csv
+|-- config/
+|   |-- analysis.yaml
+|   |-- paths.example.yaml
+|   `-- variables.yaml
+|-- data/
+|   |-- processed_examples/
+|   |   `-- README.md
+|   |-- sample/
+|   |   |-- synthetic_events.csv
+|   |   `-- synthetic_predictors.csv
+|   |-- schemas/
+|   |   `-- event_schema.csv
+|   `-- README.md
+|-- docs/
+|   |-- ANALYSIS_STORY.md
+|   |-- DATA_PROVENANCE.md
+|   |-- FIGURE_PROVENANCE.md
+|   |-- FINAL_PRESENTATION_NOT_FOUND.md
+|   |-- final_report.pdf
+|   |-- GITHUB_REPOSITORY_WALKTHROUGH.pdf
+|   |-- GITHUB_REPOSITORY_WALKTHROUGH.tex
+|   |-- LIMITATIONS.md
+|   |-- METHODS.md
+|   |-- original_selected_sensor_ml_report.pdf
+|   |-- regional_cluster_ml_report.pdf
+|   |-- RELEASE_AUDIT.md
+|   |-- REPORT_PRESENTATION_REPO_CONSISTENCY.md
+|   |-- REPORT_TO_CODE_MAP.md
+|   |-- RESULTS_SUMMARY.md
+|   |-- source_inventory.csv
+|   |-- SOURCE_INVENTORY.txt
+|   `-- VARIABLE_DICTIONARY.md
+|-- outputs/
+|   |-- demo/
+|   |   |-- clean_events.csv
+|   |   |-- demo_master.csv
+|   |   `-- metrics.json
+|   |-- headline_figures/
+|   |   |-- beta_lambda_interpretation.pdf
+|   |   |-- beta_lambda_interpretation.png
+|   |   |-- beta_univariate_forest.pdf
+|   |   |-- beta_univariate_forest.png
+|   |   |-- duration_frequency_univariate_forest.pdf
+|   |   |-- duration_frequency_univariate_forest.png
+|   |   |-- duration_tail.pdf
+|   |   |-- duration_tail.png
+|   |   |-- final_synthesis.pdf
+|   |   |-- final_synthesis.png
+|   |   |-- lambda_univariate_forest.pdf
+|   |   |-- lambda_univariate_forest.png
+|   |   |-- ml_learning_curves.pdf
+|   |   |-- ml_learning_curves.png
+|   |   |-- ml_predicted_vs_observed.pdf
+|   |   |-- ml_predicted_vs_observed.png
+|   |   |-- ml_predictor_importance.pdf
+|   |   |-- ml_predictor_importance.png
+|   |   |-- national_overview.pdf
+|   |   |-- national_overview.png
+|   |   |-- original_vs_regional_r2.pdf
+|   |   `-- original_vs_regional_r2.png
+|   |-- headline_tables/
+|   |   |-- feature_importance_summary.csv
+|   |   |-- final_ml_scorecard.csv
+|   |   |-- four_outcome_definitions.csv
+|   |   |-- sensor_counts.csv
+|   |   `-- univariate_summary.csv
+|   `-- README.md
+|-- scripts/
+|   |-- 01_build_event_master.py
+|   |-- 02_fit_tail_parameters.py
+|   |-- 03_link_sensors_to_wwtw.py
+|   |-- 04_build_predictor_master.py
+|   |-- 05_run_univariate_analysis.py
+|   |-- 06_run_machine_learning.py
+|   |-- 07_build_final_figures.py
+|   |-- build_release_assets.py
+|   |-- build_repository_walkthrough.py
+|   |-- run_release_checks.py
+|   |-- run_reproducible_demo.py
+|   `-- validate_release.py
+|-- src/
+|   `-- cso_spatial_drivers/
+|       |-- cleaning/
+|       |   |-- __init__.py
+|       |   `-- events.py
+|       |-- fitting/
+|       |   |-- __init__.py
+|       |   `-- stretched_exponential.py
+|       |-- io/
+|       |   `-- __init__.py
+|       |-- ml/
+|       |   |-- __init__.py
+|       |   `-- demo.py
+|       |-- plotting/
+|       |   `-- __init__.py
+|       |-- predictors/
+|       |   |-- __init__.py
+|       |   `-- join.py
+|       |-- spatial/
+|       |   |-- __init__.py
+|       |   `-- assignment.py
+|       |-- statistics/
+|       |   |-- __init__.py
+|       |   `-- univariate.py
+|       `-- __init__.py
+|-- tests/
+|   |-- test_beta_lambda_fitting.py
+|   |-- test_duration_calculation.py
+|   |-- test_ml_leakage.py
+|   |-- test_predictor_join.py
+|   |-- test_saved_metrics_recompute.py
+|   |-- test_spatial_assignment.py
+|   `-- test_tail_threshold.py
+|-- .gitignore
+|-- AGENTS.md
+|-- build_release.py
+|-- CITATION.cff
+|-- DATA_AVAILABILITY.md
+|-- environment.yml
+|-- GITHUB_UPLOAD_INSTRUCTIONS.md
+|-- LICENSE_DECISION_REQUIRED.md
+|-- pyproject.toml
+|-- QUICKSTART.md
+|-- README.md
+|-- REPOSITORY_TREE.txt
+|-- REPRODUCIBILITY.md
+`-- requirements.txt

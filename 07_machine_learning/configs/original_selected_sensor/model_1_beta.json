@@ -1,0 +1,48 @@
+{
+  "seed": 20260813,
+  "source_scientific_master": "PROJECT_RESULTS\\four_outcome_annual_nimrod_release_20260813_130420\\data\\scientific_master_annual_nimrod_v1.csv",
+  "source_scientific_sha256": "0bcaef45d67862f1765791d37202c8571e2920ad3fcf8ce5894c756f1113317d",
+  "source_current_ml_master": "PROJECT_RESULTS\\four_outcome_annual_nimrod_release_20260813_130420\\data\\machine_learning_master_annual_nimrod_v1.csv",
+  "source_current_ml_sha256": "eafe6902c8cafafcd711fa84b8e659756b83f900be2c684e84425b91896b3597",
+  "target": "fitted_beta",
+  "response_transformation": "log(fitted_beta)",
+  "inverse_transformation": "exp",
+  "cohort_rule": "eligible_model_1",
+  "split": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15,
+    "group": "uwwCode",
+    "balancing": "company + target quintile where feasible",
+    "seed": 20260813
+  },
+  "preprocessing": "training-only median imputation with indicators; population and area log1p; standardisation; company one-hot only in E+C sensitivity",
+  "selected": {
+    "algorithm": "OLS",
+    "feature_set": "interpretable_static",
+    "features": [
+      "hydro_high_productivity_pct",
+      "hydro_low_productivity_pct",
+      "hydro_no_groundwater_pct",
+      "hydro_intergranular_flow_pct",
+      "rain_mean_annual_mm_1991_2020",
+      "continuous_land_cover_pct",
+      "population_density_km2_2021",
+      "building_pre_1973_pct",
+      "terrain_mean_slope_deg",
+      "capacity_ratio_latest",
+      "sewershed_area_km2"
+    ],
+    "hyperparameters": {}
+  },
+  "test_evaluated_once_after_freeze": true,
+  "bootstrap_test_resamples": 2000,
+  "coefficient_resamples": 200,
+  "software": {
+    "python": "3.12.10",
+    "sklearn": "1.7.1",
+    "pandas": "3.0.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0"
+  }
+}

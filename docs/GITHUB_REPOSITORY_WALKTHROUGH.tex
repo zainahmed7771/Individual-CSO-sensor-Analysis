@@ -1,0 +1,314 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage{xcolor,graphicx,enumitem,helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\definecolor{navy}{HTML}{12344D}
+\definecolor{teal}{HTML}{2A9D8F}
+\begin{document}
+\begin{titlepage}\color{navy}\vspace*{35mm}{\Huge\bfseries CSO Spatial Drivers\par}\vspace{4mm}{\Large Repository walkthrough and evidence guide\par}\vfill Zain Ahmed | UCL research internship\\19 August 2026\end{titlepage}
+\clearpage
+{\color{teal}\small\bfseries EXECUTIVE SUMMARY}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries The answer in one page}\par
+\small What the project can and cannot claim\par\vspace{5mm}
+Catchment context contains real but limited information about differences in CSO spill behaviour. The later regional experiment shows that part of the limitation came from using one selected sensor to represent an entire treatment system.
+\begin{itemize}[leftmargin=5mm]
+\item The original one-sensor/one-WWTW models beat Dummy for all four outcomes, with modest locked-test gains of 2.6-7.0\%.
+\item The 25 km regional model improved beta by 17.4\% and reached test R-squared 0.314.
+\item Regional lambda and duration also improved, but regional frequency was worse than Dummy.
+\item Static open predictors are not a substitute for sewer topology, storage, controls, event rainfall or antecedent state.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Bottom line: keep the original submitted pathway as the primary analysis and use the regional result as strong, qualified evidence that analysis-unit choice matters.}
+\clearpage
+{\color{teal}\small\bfseries RESEARCH DESIGN}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries The end-to-end question}\par
+\small One workflow, four outcomes, two predictive units\par\vspace{5mm}
+The repository is organised around an auditable chain from event records to scientific interpretation. Every stage has a README, curated code, validation notes and explicit data-availability boundaries.
+\begin{itemize}[leftmargin=5mm]
+\item Clean heterogeneous company EDM exports into a common event contract.
+\item Fit the conditional long-duration tail above a strict 240-minute threshold.
+\item Link sensors to WWTWs and validated catchment polygons within company.
+\item Extract catchment and operational predictors, then evaluate association and prediction.
+\item Compare selected-sensor/WWTW models with target-independent regional clusters.
+\end{itemize}
+\begin{center}\includegraphics[width=0.85\linewidth,height=0.43\textheight,keepaspectratio]{\detokenize{outputs/headline_figures/national_overview.png}}\end{center}
+\vfill\noindent{\color{teal}\bfseries The workflow is observational. Spatial association and predictive value do not establish hydraulic connection or causality.}
+\clearpage
+{\color{teal}\small\bfseries DATA PROVENANCE}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries What is and is not distributed}\par
+\small A public release without private or licence-restricted raw data\par\vspace{5mm}
+The code and aggregate evidence are public-ready; the raw company event files, large licensed grids and private project material are deliberately excluded.
+\begin{itemize}[leftmargin=5mm]
+\item A synthetic event and predictor dataset exercises the portable workflow.
+\item Schemas and acquisition notes explain how authorised users can rebuild inputs.
+\item Saved aggregate tables, figures and trained estimators preserve the scientific record.
+\item Source inventory and figure provenance identify every authoritative local origin.
+\item No tokens, personal correspondence, private paths, GeoPackages or raw rasters are required by the demo.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Start with DATA\_AVAILABILITY.md and docs/DATA\_PROVENANCE.md before attempting a full scientific rebuild.}
+\clearpage
+{\color{teal}\small\bfseries EVENT PROCESSING}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Cleaning is a scientific stage}\par
+\small Duration, identity and de-duplication rules\par\vspace{5mm}
+Company exports differ in naming, schemas and monitoring periods. The harmonised contract makes those decisions visible instead of burying them inside later models.
+\begin{itemize}[leftmargin=5mm]
+\item Normalize permit and company identifiers into a stable sensor\_uid.
+\item Parse start and stop timestamps consistently and calculate duration in minutes.
+\item Reject end-before-start, missing-duration and duplicate-event records.
+\item Keep monitoring exposure separate from raw event count.
+\item Tests cover duration arithmetic and key invariants.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Frequency is valid events divided by valid monitoring years; it is not a lifetime event count.}
+\clearpage
+{\color{teal}\small\bfseries TAIL FITTING}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Why the 240-minute tail matters}\par
+\small A conditional stretched-exponential model\par\vspace{5mm}
+Long events are analysed through the conditional survivor S(t)=exp[-(lambda t)\textasciicircum{}beta]. Beta controls tail shape; lambda is an inverse-timescale. They are not interchangeable.
+\begin{itemize}[leftmargin=5mm]
+\item The active rule is strict: duration\_minutes > 240, not greater-than-or-equal.
+\item Beta is constrained to [0.01, 2]; log(lambda) is numerically bounded.
+\item Sensor-event bootstrap intervals quantify sampling uncertainty.
+\item Minimum tail counts and finite intervals define target-specific eligibility.
+\item The fit is descriptive of the observed conditional tail, not a hydraulic mechanism.
+\end{itemize}
+\begin{center}\includegraphics[width=0.85\linewidth,height=0.43\textheight,keepaspectratio]{\detokenize{outputs/headline_figures/duration_tail.png}}\end{center}
+\vfill\noindent{\color{teal}\bfseries Lower beta indicates a heavier, more persistent tail; larger lambda implies a shorter timescale at fixed beta.}
+\clearpage
+{\color{teal}\small\bfseries TAIL INTERPRETATION}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Beta and lambda must be read jointly}\par
+\small Structural coupling in a two-parameter tail\par\vspace{5mm}
+A strong relationship between fitted beta and log(lambda) is expected because both parameters describe the same conditional distribution.
+\begin{itemize}[leftmargin=5mm]
+\item Do not label lambda as a duration or a direct spill-rate measure.
+\item Coefficient signs for beta and lambda can reflect parameter geometry as well as physical context.
+\item The original report includes a dedicated beta-scale relationship analysis.
+\item Prediction is evaluated separately for each parameter to retain interpretability.
+\end{itemize}
+\begin{center}\includegraphics[width=0.85\linewidth,height=0.43\textheight,keepaspectratio]{\detokenize{outputs/headline_figures/beta_lambda_interpretation.png}}\end{center}
+\vfill\noindent{\color{teal}\bfseries Any substantive interpretation should refer to tail shape and timescale together.}
+\clearpage
+{\color{teal}\small\bfseries SPATIAL LINKAGE}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries From sensor to treatment catchment}\par
+\small Within-company matching with audited evidence\par\vspace{5mm}
+The linkage pipeline assigns each selected sensor to one WWTW and its validated catchment using containment, name evidence, distance checks and manual overrides where documented.
+\begin{itemize}[leftmargin=5mm]
+\item Company is a hard boundary: a sensor cannot be assigned to another operator's WWTW.
+\item Polygon containment is preferred when validated geometry is available.
+\item Name and distance logic support ambiguous cases; manual mappings are parsed and audited.
+\item Matching does not claim that every overflow is hydraulically connected to the selected treatment works.
+\item Row order and company + uwwCode uniqueness are protected in the master-building stages.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries The public release includes matching rules and audit logic, but not raw licensed geometries.}
+\clearpage
+{\color{teal}\small\bfseries PREDICTORS}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Catchment context assembled consistently}\par
+\small Static climatology, terrain, land, people and capacity\par\vspace{5mm}
+The predictor master joins environmental and operational summaries on audited WWTW keys while preserving the outcome cohort.
+\begin{itemize}[leftmargin=5mm]
+\item Hydrogeology: productivity and flow-type area percentages.
+\item Rainfall: 1991-2020 annual/winter climatology plus annual NIMROD indices where validated.
+\item Land and people: urban/suburban cover, population density and building-age summaries.
+\item Terrain and scale: mean slope and sewershed area.
+\item Operations: latest load, design capacity and capacity ratio, with year/provenance fields.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Catchment extraction uses British National Grid (EPSG:27700) and exact overlap weighting where required.}
+\clearpage
+{\color{teal}\small\bfseries UNIVARIATE EVIDENCE}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Association before prediction}\par
+\small Robust uncertainty and multiple-testing control\par\vspace{5mm}
+Each outcome-predictor pair is evaluated transparently before multivariable modelling. This makes direction, sample size and uncertainty visible.
+\begin{itemize}[leftmargin=5mm]
+\item Log-outcome models use HC3 robust standard errors.
+\item Pearson and Spearman summaries distinguish linear and rank association.
+\item False-discovery-rate correction controls the family of tested predictors.
+\item Broad and strict beta cohorts answer different quality questions.
+\item Percentage changes are associations, not causal effects.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries See 06\_univariate\_analysis/results/four\_outcome\_univariate\_summary.pdf for the complete cross-outcome evidence.}
+\clearpage
+{\color{teal}\small\bfseries ORIGINAL ML}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries The primary submitted modelling pathway}\par
+\small One selected CSO sensor linked to one WWTW\par\vspace{5mm}
+Four independent regressions use target-specific eligible cohorts and a fixed 70/15/15 train-validation-locked-test structure.
+\begin{itemize}[leftmargin=5mm]
+\item Dummy, OLS, Ridge and Elastic Net are compared on validation data.
+\item Preprocessing is fitted within training folds to prevent leakage.
+\item RMSE on the transformed model scale is the headline metric.
+\item Locked-test data are used once for final evaluation.
+\item The modest performance is a substantive result, not a failed workflow.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries This remains the primary pathway because it matches the submitted analysis unit and preserves site-level interpretability.}
+\clearpage
+{\color{teal}\small\bfseries ORIGINAL ML RESULTS}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries All four beat Dummy, modestly}\par
+\small Locked-test scorecard for the selected-sensor unit\par\vspace{5mm}
+The original models contain useful signal, but most site-to-site variability remains unexplained.
+\begin{itemize}[leftmargin=5mm]
+\item Beta: 4.9\% RMSE gain; test R-squared 0.073.
+\item Lambda: 4.9\% gain; R-squared 0.095.
+\item Mean duration: 2.6\% gain; R-squared 0.052.
+\item Annualised frequency: 7.0\% gain; R-squared 0.133.
+\item Frequency is the strongest original target, although still far from operational forecasting accuracy.
+\end{itemize}
+\begin{center}\includegraphics[width=0.85\linewidth,height=0.43\textheight,keepaspectratio]{\detokenize{outputs/headline_figures/original_vs_regional_r2.png}}\end{center}
+\vfill\noindent{\color{teal}\bfseries These are target-specific comparisons against each target's own Dummy baseline; raw RMSE values are not comparable across outcomes.}
+\clearpage
+{\color{teal}\small\bfseries MODEL 1}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Original beta model}\par
+\small Tail-shape prediction at selected-sensor WWTWs\par\vspace{5mm}
+Beta is the most scientifically interpretable tail parameter, but the original selected-sensor model explains only a small share of locked-test variation.
+\begin{itemize}[leftmargin=5mm]
+\item Selected algorithm: OLS.
+\item Test RMSE improvement: 4.85\% over Dummy.
+\item Test R-squared: 0.073; Spearman: 0.257.
+\item Hydrogeology, rainfall and catchment context recur in the candidate evidence.
+\item The later regional result suggests sensor-level noise was important for beta.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Treat coefficients as predictive associations; the fitted tail and spatial assignment both carry uncertainty.}
+\clearpage
+{\color{teal}\small\bfseries MODEL 2}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Original lambda model}\par
+\small Inverse-timescale prediction\par\vspace{5mm}
+Lambda spans many orders of magnitude and is structurally linked to beta, making it the least stable outcome to interpret physically on its own.
+\begin{itemize}[leftmargin=5mm]
+\item Selected algorithm: OLS.
+\item Test RMSE improvement: 4.94\% over Dummy.
+\item Test R-squared: 0.095; Spearman: 0.264.
+\item Model-scale diagnostics are more reliable than back-transformed headline errors.
+\item Any result should be discussed jointly with beta and tail-fit quality.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Use the term inverse-timescale lambda consistently; avoid calling it a direct spill duration.}
+\clearpage
+{\color{teal}\small\bfseries MODEL 3}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Original mean-duration model}\par
+\small A direct observed-event summary\par\vspace{5mm}
+Mean event duration avoids parametric tail geometry but blends short and long events and remains sensitive to monitoring and operational practice.
+\begin{itemize}[leftmargin=5mm]
+\item Selected algorithm: Ridge.
+\item Test RMSE improvement: 2.64\% over Dummy.
+\item Test R-squared: 0.052; Spearman: 0.252.
+\item The low gain supports the conclusion that static catchment context is incomplete.
+\item Event-level rainfall and controls are plausible next information sources.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Duration is easier to explain than lambda, but not necessarily easier to predict from static open data.}
+\clearpage
+{\color{teal}\small\bfseries MODEL 4}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Original annualised-frequency model}\par
+\small Exposure-adjusted event occurrence\par\vspace{5mm}
+Frequency is normalized by valid monitoring years and gives the strongest original prediction, though the signal remains modest.
+\begin{itemize}[leftmargin=5mm]
+\item Selected algorithm: Ridge.
+\item Test RMSE improvement: 6.99\% over Dummy.
+\item Test R-squared: 0.133; Spearman: 0.346.
+\item Exposure normalization is essential for fair comparison.
+\item Regional pooling does not preserve this benefit, highlighting a mismatch between frequency and the 25 km unit.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Do not replace annualised frequency with raw counts; monitoring exposure belongs in the estimand.}
+\clearpage
+{\color{teal}\small\bfseries REGIONAL EXTENSION}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Why change the analysis unit?}\par
+\small Reducing one-sensor proxy noise\par\vspace{5mm}
+A WWTW can receive flows from a wider network than one selected overflow represents. The regional experiment asks whether target-independent grouping recovers a more stable system-level signal.
+\begin{itemize}[leftmargin=5mm]
+\item WWTWs are clustered within company by complete linkage on 25 km distance.
+\item Ten and 50 km alternatives test radius sensitivity.
+\item Predictors are aggregated using variable-appropriate scientific weights.
+\item Beta and lambda use quality-aware summaries; duration and frequency use exact pooled event/exposure definitions.
+\item The clustering never uses the outcome, preventing target leakage.
+\end{itemize}
+\begin{center}\includegraphics[width=0.85\linewidth,height=0.43\textheight,keepaspectratio]{\detokenize{07_machine_learning/figures/regional_cluster/cluster_radius_model_sensitivity.png}}\end{center}
+\vfill\noindent{\color{teal}\bfseries Regional aggregation changes the scientific question: it is a system-area comparison, not a site-level replacement.}
+\clearpage
+{\color{teal}\small\bfseries REGIONAL VALIDATION}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Exact event aggregation}\par
+\small 2,045,832 assigned events checked\par\vspace{5mm}
+The regional duration and frequency targets were rebuilt from cleaned, de-duplicated assigned events rather than averaging already-aggregated site metrics.
+\begin{itemize}[leftmargin=5mm]
+\item 1,444 WWTWs map to 259 primary 25 km regions.
+\item Regions never cross a water-company boundary.
+\item Pooled frequency uses total events divided by total sensor-years.
+\item Exact event means and medians are validated against source assignments.
+\item Ten/25/50 km sensitivities show how smoothing and sample size trade off.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries This exact aggregation is a key strength of the regional comparison.}
+\clearpage
+{\color{teal}\small\bfseries REGIONAL RESULTS}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Beta improves most}\par
+\small A better unit for some outcomes, not all\par\vspace{5mm}
+The 25 km regional scorecard is substantially stronger for beta and moderately stronger for lambda and duration.
+\begin{itemize}[leftmargin=5mm]
+\item Regional beta: 17.39\% RMSE gain; R-squared 0.314.
+\item Regional lambda: 9.72\% gain; R-squared 0.180.
+\item Pooled duration: 7.78\% gain; R-squared 0.143.
+\item Exposure-adjusted frequency: -1.99\% gain; R-squared -0.063.
+\item Bootstrap intervals for the positive gains cross zero, so the evidence is promising rather than definitive.
+\end{itemize}
+\begin{center}\includegraphics[width=0.85\linewidth,height=0.43\textheight,keepaspectratio]{\detokenize{07_machine_learning/figures/regional_cluster/beta_predicted_vs_observed.png}}\end{center}
+\vfill\noindent{\color{teal}\bfseries The regional approach worked much better for beta, but saying it worked better for every parameter would be incorrect.}
+\clearpage
+{\color{teal}\small\bfseries COMPARISON}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Two units, one honest synthesis}\par
+\small What changes when WWTWs are clustered\par\vspace{5mm}
+The comparison is strongest when expressed as target-specific improvement over Dummy and model-scale R-squared, not raw RMSE across differently transformed outcomes.
+\begin{itemize}[leftmargin=5mm]
+\item Beta gains 12.5 percentage points in RMSE improvement.
+\item Lambda and duration also gain, consistent with noise reduction.
+\item Frequency reverses sign, suggesting the regional unit smooths or misaligns occurrence processes.
+\item Aggregation reduces variance and extreme values, which can make prediction easier without proving better mechanistic understanding.
+\end{itemize}
+\begin{center}\includegraphics[width=0.85\linewidth,height=0.43\textheight,keepaspectratio]{\detokenize{outputs/headline_figures/final_synthesis.png}}\end{center}
+\vfill\noindent{\color{teal}\bfseries Report both pathways: original for continuity and site-level meaning; regional for the stronger beta finding and analysis-unit insight.}
+\clearpage
+{\color{teal}\small\bfseries LIMITATIONS}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries What the models are missing}\par
+\small The information ceiling is scientifically informative\par\vspace{5mm}
+The largest unexplained component is likely not an algorithm problem. It is an input and scale problem.
+\begin{itemize}[leftmargin=5mm]
+\item No consistent national sewer topology, pipe capacity, storage or control-state data.
+\item Static rainfall climatology cannot represent event timing or antecedent saturation.
+\item Treatment headroom is only a proxy for network hydraulic capacity.
+\item Spatial assignment may not reproduce true subsurface connectivity.
+\item Company reporting, sensor selection and monitoring coverage can create structured bias.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries The next model should add better hydraulic and time-varying information before adding complexity.}
+\clearpage
+{\color{teal}\small\bfseries REPRODUCIBILITY}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries How to review and rerun}\par
+\small A safe synthetic demo plus authoritative saved evidence\par\vspace{5mm}
+The release separates reproducible code, demonstrable public inputs and scientific outputs that depend on controlled raw data.
+\begin{itemize}[leftmargin=5mm]
+\item Run: python scripts/run\_reproducible\_demo.py.
+\item Run: python -m pytest -q.
+\item Review outputs/headline\_tables/final\_ml\_scorecard.csv.
+\item Trace every report figure through docs/FIGURE\_PROVENANCE.md.
+\item Use config/path examples instead of editing machine-specific absolute paths.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries The demo proves the implementation path; it is explicitly labelled and must never be cited as a scientific result.}
+\clearpage
+{\color{teal}\small\bfseries REPOSITORY GUIDE}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries Where the evidence lives}\par
+\small A reviewer-first folder structure\par\vspace{5mm}
+The numbered folders follow the scientific story, while docs, outputs, scripts, src and tests support fast review and reruns.
+\begin{itemize}[leftmargin=5mm]
+\item 01-05: acquisition, cleaning, tail fit, spatial linkage and predictors.
+\item 06: univariate association evidence.
+\item 07: original and regional machine-learning artefacts in separate subfolders.
+\item 08: final comparison tables and figures.
+\item 09: explicitly experimental extensions and negative benchmarks.
+\item docs: reports, provenance, methods, limitations and this walkthrough.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Begin at README.md; then read the final report and the two dedicated ML reports before inspecting code.}
+\clearpage
+{\color{teal}\small\bfseries NEXT STEPS}\par
+\vspace{2mm}{\color{navy}\LARGE\bfseries The strongest research programme}\par
+\small Improve information and validation before model complexity\par\vspace{5mm}
+The release supports a focused next phase rather than an indiscriminate model search.
+\begin{itemize}[leftmargin=5mm]
+\item Validate 10 km versus 25 km clustering on a larger held-out regional sample.
+\item Add event rainfall, antecedent wetness and groundwater state.
+\item Seek sewer topology, storage, pumping and control-state data from partner companies.
+\item Use grouped repeated splits or nested spatial validation to quantify result stability.
+\item Consider hierarchical models only after resolving singularity and increasing group information.
+\item Preserve both site-level and regional estimands: they answer different operational questions.
+\end{itemize}
+\vfill\noindent{\color{teal}\bfseries Priority: better measurement, then stronger external validation, then more flexible algorithms.}
+\end{document}

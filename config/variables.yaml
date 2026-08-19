@@ -1,0 +1,12 @@
+outcomes:
+  beta: fitted_beta
+  lambda: fitted_lambda
+  duration: spill_mean_duration_minutes
+  frequency: spill_events_per_monitoring_year
+forbidden_predictor_families:
+  - identifiers
+  - coordinates
+  - outcomes
+  - confidence_intervals
+  - target_quality
+  - event_derived_fields

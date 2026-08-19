@@ -1,0 +1,8 @@
+column,type,rule
+company,string,normalized provider
+permit_number,string,stable within company
+location_name,string,descriptive
+start_time,UTC datetime,parseable
+stop_time,UTC datetime,parseable and >= start
+duration_minutes,float,non-negative minutes
+sensor_uid,string,company::permit

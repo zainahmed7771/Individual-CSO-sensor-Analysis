@@ -1,0 +1,10 @@
+tail_threshold_minutes: 240
+tail_rule: strictly_greater_than
+beta_bounds: [0.01, 2.0]
+log_lambda_bounds: [-50.0, 20.0]
+minimum_tail_events_point_fit: 10
+minimum_tail_events_bootstrap: 20
+ml_split: {train: 0.70, validation: 0.15, locked_test: 0.15}
+headline_metric: RMSE
+regional_primary_radius_km: 25
+regional_sensitivity_radii_km: [10, 50]

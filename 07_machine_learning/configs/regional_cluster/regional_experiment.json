@@ -1,0 +1,35 @@
+{
+  "seed": 20260819,
+  "primary_radius_km": 25,
+  "sensitivity_radii_km": [
+    10,
+    25,
+    50
+  ],
+  "cluster_method": "complete linkage within company on EPSG:27700 WWTW coordinates",
+  "target_values_used_to_define_regions": false,
+  "coordinates_used_as_model_predictors": false,
+  "features": [
+    "hydro_high_productivity_pct",
+    "hydro_low_productivity_pct",
+    "hydro_no_groundwater_pct",
+    "hydro_intergranular_flow_pct",
+    "rain_mean_annual_mm_1991_2020",
+    "rain_winter_mean_mm_1991_2020",
+    "continuous_land_cover_pct",
+    "population_density_km2_2021",
+    "building_pre_1973_pct",
+    "terrain_mean_slope_deg",
+    "regional_capacity_ratio",
+    "total_catchment_area_km2",
+    "rain_ann_prcptot_mm",
+    "rain_ann_rx1day_mm",
+    "rain_ann_rx5day_mm",
+    "rain_ann_sdii_mm_per_wet_day",
+    "rain_ann_r10_days",
+    "rain_ann_r20_days",
+    "rain_ann_cwd_days",
+    "rain_ann_cdd_days"
+  ],
+  "splitting": "70/15/15 region-unique; validation selects algorithm; test evaluated once"
+}

@@ -1,0 +1,12 @@
+# Copy to paths.yaml and replace placeholders. Never commit paths.yaml.
+raw_edm_root: /path/to/local/raw_or_cleaned_edm
+company_json_root: /path/to/local/company_json
+wwtw_catchments: /path/to/licensed_or_public/wwtw_catchments.gpkg
+hydrogeology: /path/to/licensed/hydrogeology.gpkg
+static_rainfall: /path/to/haduk_grid_climatology
+nimrod_archive: /path/to/nimrod_archive
+land_cover: /path/to/land_cover
+population: /path/to/population
+building_age: /path/to/building_age
+terrain: /path/to/elevation_or_slope
+output_root: outputs/full_run

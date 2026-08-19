@@ -1,0 +1,70 @@
+============================================================
+GITHUB RELEASE - FINAL COMPLETION REPORT
+============================================================
+
+RELEASE FOLDER
+Path: GITHUB_RELEASE_CSO_SPATIAL_DRIVERS/
+Total files (excluding .git): 255
+Total size: 19,890,268 bytes (18.97 MiB)
+
+DOCUMENTATION
+README: PASS - 1,643 words
+Quickstart: PASS
+Reproducibility: PASS
+Data availability: PASS
+Data provenance: PASS
+Report-to-code map: PASS
+Figure provenance: PASS
+Repository walkthrough PDF: PASS - 24 pages, rendered and visually inspected
+Repository walkthrough TeX: PASS - compiled to 24 pages with pdfTeX
+
+SCIENTIFIC STAGES
+01 Data acquisition: PASS
+02 Data cleaning: PASS
+03 Tail fitting: PASS
+04 Spatial linkage: PASS
+05 Environmental predictors: PASS
+06 Univariate analysis: PASS
+07 Machine learning: PASS - original selected-sensor and regional-cluster pathways
+08 Final synthesis: PASS
+09 Experimental extensions: PASS - explicitly labelled
+
+FINAL MATERIALS
+Report copied: YES - SHA-256 verified
+Presentation copied: NO - no authoritative presentation was found
+Original selected-sensor ML report copied: YES
+Regional-cluster ML report copied: YES
+Headline figures: 22 files (PDF and PNG)
+Headline tables: 5 CSV files
+
+REPRODUCIBILITY
+Demo: PASS - labelled DEMONSTRATION ONLY - NOT THE SCIENTIFIC RESULTS
+Tests: PASS
+Number of tests: 9
+Environment file: environment.yml
+Python version: 3.12.10
+
+RELEASE SAFETY
+Secrets scan: PASS
+Private-information scan: PASS
+Large-file scan: PASS - no file over 50 MB
+Raw-data exclusion: PASS
+Machine-path scan: PASS
+Cache/temp scan: PASS
+Manual review items: approved presentation missing; repository licence undecided
+
+GIT
+Initialized: YES, only inside the release folder
+Current branch: master (upload instructions rename it to main before first push)
+Remote configured: NO
+GitHub CLI detected: NO
+Expected remote configured: NO
+
+MAIN FILES FOR PROFESSOR
+README: README.md
+Repository walkthrough PDF: docs/GITHUB_REPOSITORY_WALKTHROUGH.pdf
+
+GITHUB RELEASE FOLDER COMPLETE
+READY FOR MANUAL REVIEW
+NOT YET LICENSED OR READY FOR PUBLIC GITHUB UPLOAD
+============================================================

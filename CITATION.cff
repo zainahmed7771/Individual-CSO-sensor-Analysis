@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this research repository, please cite it using these metadata."
+title: "CSO Spatial Drivers: From National Spill Records to Catchment-Scale Prediction"
+type: software
+authors:
+  - family-names: Ahmed
+    given-names: Zain
+version: 1.0.0
+date-released: 2026-08-19

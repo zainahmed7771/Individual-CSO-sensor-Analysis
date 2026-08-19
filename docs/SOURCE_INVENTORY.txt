@@ -1,0 +1,21 @@
+============================================================
+GITHUB RELEASE - SOURCE INVENTORY
+============================================================
+Final report: PROJECT_RESULTS/Final Documents/CSO_Final_Report_Style_Preview.pdf
+Final presentation: NOT FOUND - manual review required
+Original ML report: PROJECT_RESULTS/Final Documents/CSO_NEW_MACHINE_LEARNING_MODELS_1_TO_4_MASTER_REPORT_REDESIGNED.pdf
+Regional ML report: REGIONAL_CLUSTER_AND_UNIVARIATE_ML/01_regional_cluster_model/report/CSO_REGIONAL_CLUSTER_MACHINE_LEARNING_REPORT.pdf
+Authoritative scientific master: PROJECT_RESULTS/four_outcome_annual_nimrod_release_20260813_130420/data/scientific_master_annual_nimrod_v1.csv
+Authoritative event dataset: clean_data/<company>/*.csv (not distributed)
+Beta/lambda pipeline: analyse_individual_cso_heavy_tails.py + bootstrap_all_individual_cso_sensors.py
+Spatial linkage pipeline: scripts/02,03,08b,08c,08e,11
+Environmental predictor pipeline: scripts/04,05,07,09 plus annual NIMROD pipeline
+Univariate pipeline: four_outcome_annual_nimrod_release statistical_analysis/pipeline
+Original ML pipeline: machine learning/NEW MACHINE LEARNING/pipeline/ml_programme.py
+Regional ML pipeline: REGIONAL_CLUSTER_AND_UNIVARIATE_ML/pipeline
+Figure sources: final documents, original ML figures, regional ML figures
+Tests: root tests plus new public scientific-invariant tests
+Large/raw datasets: EDM, JSON, NIMROD, rasters, shapefiles, GeoPackages
+Files requiring exclusion: correspondence, tokens, local configs, caches, archives, _runtime
+Potential secrets/private material: ceda_token path referenced in downloader; token file not copied
+============================================================

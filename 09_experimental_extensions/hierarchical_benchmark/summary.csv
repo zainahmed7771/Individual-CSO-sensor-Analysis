@@ -1,0 +1,5 @@
+target,method,n,groups,rmse_in_sample,r2_in_sample,aic,icc,status,held_region_cv_rmse_mean,regional_aggregation_test_r2
+beta,OLS WWTW fixed effects,1008,225,0.6192432846686726,0.05063800813694297,1908.3978601228537,,converged,0.6222624198242469,0.3141877060233733
+beta,MixedLM random intercept by region,1008,225,,,,,failed: LinAlgError: Singular matrix,0.5587599133200295,0.3141877060233733
+duration,OLS WWTW fixed effects,1305,257,1.241414870803994,0.03396887628304168,4281.846649564495,,converged,1.2499939996301257,0.1428620637069244
+duration,MixedLM random intercept by region,1305,257,,,,,failed: LinAlgError: Singular matrix,1.2399830736090762,0.1428620637069244

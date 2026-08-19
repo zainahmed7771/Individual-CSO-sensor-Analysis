@@ -1,0 +1,16 @@
+REPRODUCIBLE FINAL RUN ORDER
+============================
+
+1. 00_inspect_and_beta_diagnostic.py
+2. 01_run_regional_analysis.py
+3. 02_run_univariate_ml.py
+4. 03_run_hierarchical_benchmark.py
+5. 06_exact_event_medians_and_radius_models.py
+6. 04_build_reports_and_release.py
+7. 07_redesign_regional_report.py
+8. 05_validate_release.py
+
+Script 04 assembles both reports and release documentation. Script 07 then
+replaces only the regional PDF with the final compact 17-page redesigned
+version matching the CSO_NEW visual reference. Script 05 validates the final
+state and refreshes the output catalogue.

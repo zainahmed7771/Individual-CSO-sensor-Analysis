@@ -1,0 +1,54 @@
+# secrets and local configuration
+.env
+.env.*
+*.pem
+*.key
+*token*.txt
+config/paths.yaml
+
+# raw and large data
+data/raw/
+data_raw/
+clean_data/
+json_data/
+**/nimrod_1km_5min/
+*.tif
+*.tiff
+*.nc
+*.grib
+*.grib2
+*.shp
+*.dbf
+*.shx
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.pytest_runtime_tmp/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# QGIS / GIS scratch
+*.qgz~
+*.qgs~
+*.gpkg-shm
+*.gpkg-wal
+*.aux.xml
+
+# IDE / OS / LaTeX temporary
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# demo is regenerated
+outputs/demo/

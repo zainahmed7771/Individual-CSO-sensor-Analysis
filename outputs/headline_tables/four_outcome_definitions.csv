@@ -1,0 +1,5 @@
+outcome,definition,transformation,interpretation
+beta,stretched-exponential tail shape,log(beta),lower = heavier/more persistent tail
+lambda,inverse-timescale parameter,log(lambda),higher = shorter characteristic time at fixed beta
+duration,mean valid event duration,log1p(minutes),direct observed duration summary
+frequency,events per valid monitoring year,log1p(rate),exposure-adjusted occurrence

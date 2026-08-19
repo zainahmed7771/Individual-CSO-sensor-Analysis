@@ -1,0 +1,85 @@
+{
+  "automatic_place_score_threshold": 85.0,
+  "minimum_place_score_margin": 8.0,
+  "coordinate_support_distance_m": 1000.0,
+  "exact_place_match_enabled": true,
+  "place_subset_match_enabled": true,
+  "same_company_required": true,
+  "top_candidate_count": 5,
+  "place_core_score_weights": {
+    "place_core_levenshtein_similarity": 0.40,
+    "place_core_token_set_ratio": 0.35,
+    "place_core_weighted_ratio": 0.25
+  },
+  "facility_vocabularies": {
+    "treatment_works": [
+      "SEWAGE TREATMENT WORKS",
+      "WASTEWATER TREATMENT WORKS",
+      "WASTE WATER TREATMENT WORKS",
+      "WATER RECYCLING CENTRE",
+      "WATER RECYCLING CENTER",
+      "WATER RECYCLING CTR",
+      "WATER POLLUTION CONTROL WORKS",
+      "SEWAGE WORKS",
+      "TREATMENT WORKS",
+      "TREATMENT PLANT",
+      "WWTW",
+      "WWTP",
+      "STW",
+      "STP",
+      "WRC",
+      "WPC"
+    ],
+    "overflow": [
+      "COMBINED SEWER OVERFLOW",
+      "EMERGENCY OVERFLOW",
+      "STORM OVERFLOW",
+      "STORM TANK",
+      "STORM DISCHARGE",
+      "STORM SEWAGE",
+      "FINAL EFFLUENT",
+      "FINAL DISCHARGE",
+      "OUTFALL",
+      "OUTLET",
+      "SSO",
+      "CSO",
+      "CEO",
+      "EMO",
+      "EO",
+      "SO",
+      "F E"
+    ],
+    "pumping": [
+      "TERMINAL PUMPING STATION",
+      "PUMPING STATION",
+      "TPS",
+      "SPS",
+      "PS",
+      "SP"
+    ]
+  },
+  "suffix_only_tokens": [
+    "STORM"
+  ],
+  "opposing_qualifier_groups": [
+    ["NORTH", "SOUTH"],
+    ["EAST", "WEST"],
+    ["UPPER", "LOWER"],
+    ["NEW", "OLD"],
+    ["LITTLE", "GREAT"]
+  ],
+  "asset_relationships_compatible_with_treatment_works": [
+    "TREATMENT WORKS",
+    "STORM OVERFLOW",
+    "STORM TANK",
+    "OUTFALL",
+    "OUTLET",
+    "FINAL EFFLUENT",
+    "EMERGENCY OVERFLOW",
+    "PUMPING STATION"
+  ],
+  "catchment_alias_channel": {
+    "enabled": true,
+    "automatic_match_requires_existing_uwwcode_or_spatial_support": true
+  }
+}
