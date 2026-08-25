@@ -1,16 +1,22 @@
-REPRODUCIBLE FINAL RUN ORDER
-============================
+PRESERVED REGIONAL SCIENTIFIC SCRIPTS
+=====================================
 
-1. 00_inspect_and_beta_diagnostic.py
-2. 01_run_regional_analysis.py
-3. 02_run_univariate_ml.py
-4. 03_run_hierarchical_benchmark.py
-5. 06_exact_event_medians_and_radius_models.py
-6. 04_build_reports_and_release.py
-7. 07_redesign_regional_report.py
-8. 05_validate_release.py
+The public repository contains the four scripts required to inspect and audit
+the preserved regional result products:
 
-Script 04 assembles both reports and release documentation. Script 07 then
-replaces only the regional PDF with the final compact 17-page redesigned
-version matching the CSO_NEW visual reference. Script 05 validates the final
-state and refreshes the output catalogue.
+1. 01_run_regional_analysis.py
+2. 03_run_hierarchical_benchmark.py
+3. 06_exact_event_medians_and_radius_models.py
+4. 07_redesign_regional_report.py
+
+These are historical scientific-provenance implementations and expect the
+authorised development workspace described in docs/FULL_PIPELINE_RUNBOOK.md.
+They are not the supported first command for a new student.
+
+For a clean executable teaching/scientific-core run, use from repository root:
+
+    python scripts/run_pipeline.py --config config/demo.yaml
+
+or replace config/demo.yaml with the ignored local config/scientific.yaml.
+
+No absent script is implied by this run-order file.

@@ -1,4 +1,4 @@
-GITHUB_RELEASE_CSO_SPATIAL_DRIVERS/
+github_end_to_end_repository/
 |-- .github/
 |   `-- workflows/
 |       `-- tests.yml
@@ -22,12 +22,16 @@ GITHUB_RELEASE_CSO_SPATIAL_DRIVERS/
 |   |   `-- README.md
 |   |-- scripts/
 |   |   |-- analyse_individual_cso_heavy_tails.py
-|   |   `-- bootstrap_all_individual_cso_sensors.py
+|   |   |-- bootstrap_all_individual_cso_sensors.py
+|   |   `-- terminal_progress.py
 |   |-- tests/
 |   |   `-- README.md
 |   |-- equations.md
 |   `-- README.md
 |-- 04_spatial_linkage/
+|   |-- config/
+|   |   |-- wwtw_primary_sensor_selection.json
+|   |   `-- wwtw_sensor_place_core_matching.json
 |   |-- figures/
 |   |   `-- README.md
 |   |-- scripts/
@@ -193,6 +197,10 @@ GITHUB_RELEASE_CSO_SPATIAL_DRIVERS/
 |   |-- univariate_ml/
 |   |   `-- all_univariate_results.csv
 |   `-- README.md
+|-- archive/
+|   `-- legacy_release_builder/
+|       |-- build_release_legacy.py
+|       `-- README.md
 |-- audit/
 |   |-- FINAL_COMPLETION_REPORT.txt
 |   |-- latex_compile_summary.json
@@ -200,23 +208,29 @@ GITHUB_RELEASE_CSO_SPATIAL_DRIVERS/
 |   `-- validation_results.csv
 |-- config/
 |   |-- analysis.yaml
+|   |-- demo.yaml
 |   |-- paths.example.yaml
+|   |-- scientific.example.yaml
 |   `-- variables.yaml
 |-- data/
 |   |-- processed_examples/
 |   |   `-- README.md
 |   |-- sample/
+|   |   |-- synthetic_assignments.csv
 |   |   |-- synthetic_events.csv
+|   |   |-- synthetic_monitoring_exposure.csv
 |   |   `-- synthetic_predictors.csv
 |   |-- schemas/
 |   |   `-- event_schema.csv
 |   `-- README.md
 |-- docs/
 |   |-- ANALYSIS_STORY.md
+|   |-- DATA_ACQUISITION_CHECKLIST.md
 |   |-- DATA_PROVENANCE.md
 |   |-- FIGURE_PROVENANCE.md
 |   |-- FINAL_PRESENTATION_NOT_FOUND.md
-|   |-- final_report.pdf
+|   |-- Full-report.pdf
+|   |-- FULL_PIPELINE_RUNBOOK.md
 |   |-- GITHUB_REPOSITORY_WALKTHROUGH.pdf
 |   |-- GITHUB_REPOSITORY_WALKTHROUGH.tex
 |   |-- LIMITATIONS.md
@@ -229,12 +243,25 @@ GITHUB_RELEASE_CSO_SPATIAL_DRIVERS/
 |   |-- RESULTS_SUMMARY.md
 |   |-- source_inventory.csv
 |   |-- SOURCE_INVENTORY.txt
+|   |-- STUDENT_LEARNING_PATH.md
 |   `-- VARIABLE_DICTIONARY.md
 |-- outputs/
-|   |-- demo/
-|   |   |-- clean_events.csv
-|   |   |-- demo_master.csv
-|   |   `-- metrics.json
+|   |-- demo_pipeline/
+|   |   |-- 01_cleaning/
+|   |   |   `-- clean_events.csv
+|   |   |-- 02_tail_fitting/
+|   |   |   `-- sensor_outcomes.csv
+|   |   |-- 03_master/
+|   |   |   `-- scientific_master.csv
+|   |   |-- 04_univariate/
+|   |   |   `-- univariate_results.csv
+|   |   |-- 05_machine_learning/
+|   |   |   |-- models/
+|   |   |   |-- locked_test_predictions.csv
+|   |   |   `-- model_scorecard.csv
+|   |   |-- 06_report/
+|   |   |   `-- RUN_SUMMARY.md
+|   |   `-- run_manifest.json
 |   |-- headline_figures/
 |   |   |-- beta_lambda_interpretation.pdf
 |   |   |-- beta_lambda_interpretation.png
@@ -275,53 +302,72 @@ GITHUB_RELEASE_CSO_SPATIAL_DRIVERS/
 |   |-- 07_build_final_figures.py
 |   |-- build_release_assets.py
 |   |-- build_repository_walkthrough.py
+|   |-- check_inputs.py
+|   |-- run_pipeline.py
 |   |-- run_release_checks.py
 |   |-- run_reproducible_demo.py
 |   `-- validate_release.py
 |-- src/
-|   `-- cso_spatial_drivers/
-|       |-- cleaning/
-|       |   |-- __init__.py
-|       |   `-- events.py
-|       |-- fitting/
-|       |   |-- __init__.py
-|       |   `-- stretched_exponential.py
-|       |-- io/
-|       |   `-- __init__.py
-|       |-- ml/
-|       |   |-- __init__.py
-|       |   `-- demo.py
-|       |-- plotting/
-|       |   `-- __init__.py
-|       |-- predictors/
-|       |   |-- __init__.py
-|       |   `-- join.py
-|       |-- spatial/
-|       |   |-- __init__.py
-|       |   `-- assignment.py
-|       |-- statistics/
-|       |   |-- __init__.py
-|       |   `-- univariate.py
-|       `-- __init__.py
+|   |-- cso_spatial_drivers/
+|   |   |-- cleaning/
+|   |   |   |-- __init__.py
+|   |   |   `-- events.py
+|   |   |-- fitting/
+|   |   |   |-- __init__.py
+|   |   |   `-- stretched_exponential.py
+|   |   |-- io/
+|   |   |   `-- __init__.py
+|   |   |-- ml/
+|   |   |   |-- __init__.py
+|   |   |   `-- demo.py
+|   |   |-- plotting/
+|   |   |   `-- __init__.py
+|   |   |-- predictors/
+|   |   |   |-- __init__.py
+|   |   |   `-- join.py
+|   |   |-- spatial/
+|   |   |   |-- __init__.py
+|   |   |   |-- assignment.py
+|   |   |   `-- identifiers.py
+|   |   |-- statistics/
+|   |   |   |-- __init__.py
+|   |   |   `-- univariate.py
+|   |   |-- __init__.py
+|   |   |-- cli.py
+|   |   |-- config.py
+|   |   `-- workflow.py
+|   `-- cso_spatial_drivers.egg-info/
+|       |-- dependency_links.txt
+|       |-- entry_points.txt
+|       |-- PKG-INFO
+|       |-- requires.txt
+|       |-- SOURCES.txt
+|       `-- top_level.txt
 |-- tests/
 |   |-- test_beta_lambda_fitting.py
 |   |-- test_duration_calculation.py
+|   |-- test_end_to_end_pipeline.py
 |   |-- test_ml_leakage.py
 |   |-- test_predictor_join.py
 |   |-- test_saved_metrics_recompute.py
 |   |-- test_spatial_assignment.py
 |   `-- test_tail_threshold.py
+|-- .gitattributes
 |-- .gitignore
 |-- AGENTS.md
 |-- build_release.py
 |-- CITATION.cff
+|-- CONTRIBUTING.md
 |-- DATA_AVAILABILITY.md
 |-- environment.yml
 |-- GITHUB_UPLOAD_INSTRUCTIONS.md
+|-- LICENSE
 |-- LICENSE_DECISION_REQUIRED.md
 |-- pyproject.toml
 |-- QUICKSTART.md
 |-- README.md
 |-- REPOSITORY_TREE.txt
 |-- REPRODUCIBILITY.md
-`-- requirements.txt
+|-- requirements-lock.txt
+|-- requirements.txt
+`-- Sewer EIR Coverage Tracker (Visual).xlsx

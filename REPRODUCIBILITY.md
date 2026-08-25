@@ -1,22 +1,32 @@
-# Reproducibility
+# Reproducibility statement
 
-## Supported public workflow
+## What is reproducible from the public clone?
+
+The complete teaching workflow is executable from included synthetic inputs:
+
 ```bash
-python -m pip install -e .[test]
+python -m pip install -e '.[test]'
+python scripts/check_inputs.py --config config/demo.yaml
+python scripts/run_pipeline.py --config config/demo.yaml
 pytest -q
-python scripts/run_reproducible_demo.py
 ```
-This exercises event validation, duration calculation, unique sensor identity, strict `T > 240` filtering, stretched-exponential fitting, predictor joins, one univariate model, and a small locked-test regression.
 
-## Full-data workflow
-The authoritative development scripts are preserved under the numbered stages. They are historical implementations with repository-relative contracts, not a promise that restricted inputs can be downloaded automatically.
+It executes the same portable contracts used by the scientific core: event cleaning, strict `>240` tail fitting, accepted linkage, exposure-adjusted frequency, predictor joining, univariate analysis, four locked-test models and a hash-bearing run manifest.
 
-1. Harmonise provider files (`01_data_acquisition/`, `02_data_cleaning/`).
-2. Run `03_tail_parameter_fitting/scripts/analyse_individual_cso_heavy_tails.py` and bootstrap scripts.
-3. Run spatial-linkage scripts in their documented order.
-4. Build environmental predictors and the scientific master.
-5. Run the univariate pipeline.
-6. Run `07_machine_learning/scripts/original_selected_sensor/ml_programme.py`.
-7. Run regional scripts in the order recorded in `07_machine_learning/scripts/regional_cluster/RUN_ORDER.txt`.
+## What is required for the scientific run?
 
-QGIS/manual inspection remains part of spatial QC. Raw data, licences and machine paths must be supplied locally through `config/paths.yaml`. No released script silently edits raw inputs.
+Copy `config/scientific.example.yaml` to the ignored `config/scientific.yaml`, supply the four authorised inputs, and run the same commands with that configuration. The core pipeline never embeds machine-specific paths.
+
+Raw provider harmonisation and environmental GIS extraction remain separate because their source data are large, provider-specific or externally licensed. Their exact hand-offs are documented in `docs/FULL_PIPELINE_RUNBOOK.md` and the numbered stage READMEs.
+
+## Reproducibility levels
+
+| Level | Included? | Claim |
+|---|---|---|
+| Code and environment | Yes | Installable Python project with declared optional GIS dependencies |
+| Complete teaching run | Yes | Executes locally and in CI from supplied synthetic data |
+| Aggregate scientific evidence | Yes | Headline tables, figures, predictions, models and reports are preserved |
+| Scientific core rerun | Conditional | Executes after the four documented authorised inputs are supplied |
+| Raw-source reconstruction | Conditional | Requires provider/GIS source access and documented human spatial QC |
+
+The repository never substitutes synthetic values for missing scientific inputs and never treats absent restricted data as a successful scientific reproduction.

@@ -1,21 +1,28 @@
-# 03 Tail Parameter Fitting
+# 03 – Long-duration tail fitting
 
-## Scientific question
-How are long-duration persistence parameters estimated?
+**Question:** how persistent is each sensor's distribution of events longer than four hours?
 
-## Inputs
-Clean sensor events and the strict 240-minute threshold.
+The fitted conditional survival model is `S(t)=exp[-(lambda*t)^beta]`. Tail membership is strictly `duration_minutes > 240`; exactly 240 minutes is excluded. Lower beta means a heavier tail. Lambda is an inverse-timescale per minute.
 
-## Code to run
-Conditional stretched-exponential MLE and nonparametric sensor bootstrap.
+## Maintained core
 
-## Outputs
-Beta, lambda, intervals, fit status and tail support.
+```powershell
+python scripts\02_fit_tail_parameters.py --config config\demo.yaml
+```
 
-## QC and validation
-Positivity/bounds, tail count, bootstrap success, boundary-hit and CI checks.
+Output: `<output_root>/02_tail_fitting/sensor_outcomes.csv`.
 
-## Connection to the next stage
-Validated sensor outcomes feed WWTW linkage.
+## Historical national fit and bootstrap
 
-The public demo exercises the portable core. Full-scale scripts require omitted source data described in `../DATA_AVAILABILITY.md`.
+```powershell
+python 03_tail_parameter_fitting\scripts\analyse_individual_cso_heavy_tails.py --help
+python 03_tail_parameter_fitting\scripts\bootstrap_all_individual_cso_sensors.py --help
+```
+
+The full copy-paste commands are in `docs/FULL_PIPELINE_RUNBOOK.md`. Bootstrap intervals measure resampling precision; they are not proof of model adequacy.
+
+Validation:
+
+```powershell
+pytest tests\test_tail_threshold.py tests\test_beta_lambda_fitting.py -q
+```

@@ -1,21 +1,11 @@
-# 08 Final Synthesis
+# 08 – Final synthesis
 
-## Scientific question
-What did the project learn overall?
+**Question:** what conclusions survive the full chain of data quality, linkage uncertainty, inference and locked-test validation?
 
-## Inputs
-Univariate results, original ML, regional ML and diagnostics.
+```powershell
+python scripts\07_build_final_figures.py --config config\demo.yaml
+```
 
-## Code to run
-Audited scorecard/figure assembly.
+The maintained command completes all core stages and writes `<output_root>/06_report/RUN_SUMMARY.md` plus `run_manifest.json`. The manifest is the machine-readable record of input hashes and generated products.
 
-## Outputs
-Professor-facing reports, headline tables and restrained conclusions.
-
-## QC and validation
-Cross-document metric and wording checks.
-
-## Connection to the next stage
-Provides the submitted scientific narrative and future priorities.
-
-The public demo exercises the portable core. Full-scale scripts require omitted source data described in `../DATA_AVAILABILITY.md`.
+Authoritative scientific figures are in `figures/` and `outputs/headline_figures/`; the reports are in `docs/`. Conclusions must retain the difference between association and causality, beta and lambda, original and regional estimands, and static context versus missing hydraulic/event-state information.

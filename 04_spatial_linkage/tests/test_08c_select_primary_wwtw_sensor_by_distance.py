@@ -11,14 +11,14 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "scripts/08c_select_primary_wwtw_sensor_by_distance.py"
+SCRIPT = ROOT / "scripts/select_primary_sensor.py"
 SPEC = importlib.util.spec_from_file_location("primary_distance", SCRIPT)
 MODULE = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = MODULE
 SPEC.loader.exec_module(MODULE)
 CONFIG = json.loads((ROOT / "config/wwtw_primary_sensor_selection.json").read_text(encoding="utf-8"))
 PROTECTED = [
-    ROOT / "scripts/08b_rebuild_wwtw_name_matching_place_core.py",
+    ROOT / "scripts/rebuild_name_matching.py",
     ROOT / "config/wwtw_sensor_place_core_matching.json",
 ]
 

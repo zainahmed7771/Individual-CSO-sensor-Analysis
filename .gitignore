@@ -52,3 +52,9 @@ Thumbs.db
 
 # demo is regenerated
 outputs/demo/
+outputs/demo_pipeline/
+
+# locally generated run configuration and scientific outputs
+config/paths.yaml
+outputs/full_run/
+audit/latest_run/

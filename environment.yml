@@ -9,6 +9,12 @@ dependencies:
   - scikit-learn
   - statsmodels
   - pyyaml
+  - geopandas
+  - shapely
+  - rasterio
+  - pyogrio
+  - openpyxl
+  - requests
   - pip
   - pip:
       - reportlab

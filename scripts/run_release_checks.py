@@ -29,9 +29,15 @@ def main() -> None:
     if result.returncode:
         raise SystemExit(result.returncode)
 
-    demo = subprocess.run([sys.executable, "scripts/run_reproducible_demo.py"], cwd=ROOT, capture_output=True, text=True, check=False, env=env)
+    input_check = subprocess.run([sys.executable, "scripts/check_inputs.py", "--config", "config/demo.yaml"], cwd=ROOT, capture_output=True, text=True, check=False, env=env)
+    print(input_check.stdout, end="")
+    if input_check.returncode or "INPUT CHECK: PASSED" not in input_check.stdout:
+        print(input_check.stderr, file=sys.stderr, end="")
+        raise SystemExit(input_check.returncode or 1)
+
+    demo = subprocess.run([sys.executable, "scripts/run_pipeline.py", "--config", "config/demo.yaml", "--force"], cwd=ROOT, capture_output=True, text=True, check=False, env=env)
     print(demo.stdout, end="")
-    if demo.returncode or "DEMONSTRATION ONLY - NOT THE SCIENTIFIC RESULTS" not in demo.stdout:
+    if demo.returncode or "PIPELINE COMPLETED" not in demo.stdout:
         print(demo.stderr, file=sys.stderr, end="")
         raise SystemExit(demo.returncode or 1)
 

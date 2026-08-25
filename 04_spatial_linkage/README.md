@@ -1,21 +1,30 @@
-# 04 Spatial Linkage
+# 04 – Sensor-to-WWTW linkage
 
-## Scientific question
-Which WWTW/catchment provides context for each sensor?
+**Question:** which accepted treatment-work context is assigned to each sensor?
 
-## Inputs
-Sensor coordinates/names, company, treatment works and catchment polygons.
+Spatial containment, name similarity and distance are evidence; none proves underground hydraulic connectivity. Selection must be outcome-blind. The scientific-core assignment file is frozen before beta, capacity and environmental fields are joined.
 
-## Code to run
-Same-company containment plus documented name/distance/manual evidence.
+## Validate a frozen assignment contract
 
-## Outputs
-Audited sensor-WWTW assignments and one selected sensor per WWTW for the original analysis.
+```powershell
+python scripts\03_link_sensors_to_wwtw.py --config config\demo.yaml
+```
 
-## QC and validation
-Uniqueness, ambiguity, company consistency and beta-blind assignment.
+Each row requires unique `sensor_uid`, `company`, `uwwCode` and non-empty `assignment_evidence`.
 
-## Connection to the next stage
-Linked WWTWs receive external predictors.
+## Rebuild upstream evidence
 
-The public demo exercises the portable core. Full-scale scripts require omitted source data described in `../DATA_AVAILABILITY.md`.
+```powershell
+python 04_spatial_linkage\scripts\assign_sensors_to_catchments.py --project-root "D:\path\to\analysis_workspace" --all-companies
+python 04_spatial_linkage\scripts\rebuild_name_matching.py --project-root "D:\path\to\analysis_workspace"
+python 04_spatial_linkage\scripts\select_primary_sensor.py --project-root "D:\path\to\analysis_workspace"
+python 04_spatial_linkage\scripts\build_final_manual_release.py --project-root "D:\path\to\analysis_workspace" --manual-matches "D:\path\to\matching.txt"
+```
+
+Read `matching_rules.md` before changing any threshold or manual decision. Preserve rejected and ambiguous alternatives in audit outputs.
+
+Validation:
+
+```powershell
+pytest 04_spatial_linkage\tests -q
+```

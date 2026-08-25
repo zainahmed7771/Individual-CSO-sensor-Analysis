@@ -1,20 +1,24 @@
-# GitHub upload instructions
+# Maintainer release procedure
 
-Local Git is initialized by the release build. No remote is configured and nothing is pushed.
+Do development on a branch and require a clean validation run before merging:
 
-After reviewing `docs/RELEASE_AUDIT.md`, choosing a licence, and adding the approved presentation:
-```bash
+```powershell
+git switch -c feature/descriptive-name
+python -m pip install -e ".[full,test]"
+python scripts\run_release_checks.py
 git status
 git add .
-git commit -m "Initial professor-ready CSO spatial-drivers release"
-git branch -M main
-git remote add origin https://github.com/<OWNER>/<REPOSITORY>.git
-git push -u origin main
+git commit -m "Describe the reproducibility change"
+git push -u origin feature/descriptive-name
 ```
 
-GitHub CLI was not detected during the build. Optional later alternative after installing/authenticating `gh`:
-```bash
-gh repo create <REPOSITORY> --source . --remote origin --private
-git push -u origin main
+Open a pull request, confirm both Windows and Ubuntu CI jobs pass, review the generated diff and merge without rewriting scientific history. Tag stable releases from `main`:
+
+```powershell
+git switch main
+git pull --ff-only
+git tag -a v1.1.0 -m "Executable end-to-end teaching and scientific-core release"
+git push origin v1.1.0
 ```
-Do not make the repository public until licence and data-review items are resolved.
+
+Never commit `config/scientific.yaml`, raw provider data, credentials or machine-local outputs.

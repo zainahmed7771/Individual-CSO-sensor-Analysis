@@ -4,14 +4,19 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cso-spatial-drivers"
-version = "1.0.0"
+version = "1.1.0"
 description = "Reproducible methods and final evidence for the UCL CSO spatial-drivers internship"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["numpy>=2.0,<3", "pandas>=2.2,<4", "scipy>=1.13,<2", "matplotlib>=3.8,<4", "scikit-learn>=1.5,<2", "statsmodels>=0.14,<1", "joblib>=1.4,<2", "PyYAML>=6,<7", "reportlab>=4,<5", "PyMuPDF>=1.24,<2"]
+dependencies = ["numpy>=2.0,<3", "pandas>=2.2,<4", "scipy>=1.13,<2", "matplotlib>=3.8,<4", "scikit-learn>=1.5,<2", "statsmodels>=0.14,<1", "joblib>=1.4,<2", "PyYAML>=6,<7"]
 
 [project.optional-dependencies]
-test = ["pytest>=8,<10", "reportlab>=4,<5"]
+test = ["pytest>=8,<10", "reportlab>=4,<5", "PyMuPDF>=1.24,<2"]
+spatial = ["geopandas>=1.0,<2", "shapely>=2.0,<3", "rasterio>=1.4,<2", "pyogrio>=0.10,<1", "openpyxl>=3.1,<4", "requests>=2.32,<3"]
+full = ["geopandas>=1.0,<2", "shapely>=2.0,<3", "rasterio>=1.4,<2", "pyogrio>=0.10,<1", "openpyxl>=3.1,<4", "requests>=2.32,<3", "reportlab>=4,<5", "PyMuPDF>=1.24,<2"]
+
+[project.scripts]
+cso-pipeline = "cso_spatial_drivers.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -20,6 +25,6 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "02_data_cleaning/tests", "04_spatial_linkage/tests", "05_environmental_predictors/tests"]
 addopts = "-ra --basetemp=.pytest_runtime_tmp"
 pythonpath = ["src"]

@@ -1,0 +1,19 @@
+# Direct dependency versions used for the validated Windows/Python 3.12 release.
+# Transitive dependencies remain resolved by pip for the current platform.
+numpy==2.5.1
+pandas==3.0.3
+scipy==1.18.0
+matplotlib==3.11.0
+scikit-learn==1.9.0
+statsmodels==0.14.6
+joblib==1.5.3
+PyYAML==6.0.3
+geopandas==1.1.4
+shapely==2.1.2
+rasterio==1.4.3
+pyogrio==0.11.1
+openpyxl==3.1.5
+requests==2.34.2
+reportlab==4.5.1
+PyMuPDF==1.28.2
+pytest==9.1.1

@@ -1,0 +1,6 @@
+{
+  "automatic_place_score_threshold": 85.0,
+  "minimum_place_score_margin": 8.0,
+  "coordinate_support_distance_m": 1000.0,
+  "same_company_required": true
+}

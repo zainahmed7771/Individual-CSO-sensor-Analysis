@@ -1,0 +1,30 @@
+# Copy to scientific.yaml and replace each /path/to/... value.
+# Run all commands from the repository root. Never commit scientific.yaml.
+profile: authorised_scientific_inputs
+seed: 20260819
+
+paths:
+  # One standardised event CSV, or a directory containing standardised CSVs.
+  events: /path/to/standardised_event_csv_or_directory
+  # Accepted, outcome-blind sensor-to-WWTW decisions. Required columns:
+  # sensor_uid, company, uwwCode, assignment_evidence
+  assignments: /path/to/accepted_sensor_wwtw_assignments.csv
+  # One row per company + uwwCode containing the configured predictors.
+  predictors: /path/to/scientific_predictor_master.csv
+  # One row per sensor_uid with an audited positive monitoring_years value.
+  monitoring_exposure: /path/to/monitoring_exposure.csv
+  output_root: outputs/full_run
+
+analysis:
+  tail_threshold_minutes: 240
+  tail_rule: strictly_greater_than
+
+# Replace or extend this list only with external, non-leaking predictors.
+# Never include identifiers, coordinates, fitted outcomes, confidence intervals,
+# quality flags, split labels or other event-derived target information.
+predictors:
+  - rain_mean_annual_mm_1991_2020
+  - rain_winter_mean_mm_1991_2020
+  - population_density_km2
+  - catchment_area_km2
+  - treatment_capacity_ratio

@@ -1,21 +1,27 @@
-# 01 Data Acquisition
+# 01 – Data acquisition
 
-## Scientific question
-Where do the EDM and external records come from?
+**Question:** where did each event or external variable originate, and may it be redistributed?
 
-## Inputs
-Provider exports, year coverage, source schemas and download notes.
+Run from the repository root. Store downloads outside Git or in ignored raw-data directories. Preserve original filenames and hashes; write standardised derivatives elsewhere.
 
-## Code to run
-Company-specific acquisition/standardisation scripts plus schemas.
+## Required output contract
 
-## Outputs
-Locally stored immutable source files and manifests; no raw data are shipped.
+Provider events must ultimately contain `company`, `permit_number`, `location_name`, `start_time` and `stop_time`. See `data/schemas/event_schema.csv`.
 
-## QC and validation
-Coverage, checksum, schema and licence review.
+## Thames JSON example
 
-## Connection to the next stage
-Validated source files enter common event cleaning.
+```powershell
+python 01_data_acquisition\scripts\prepare_thames_company_data.py events --project-root "D:\path\to\analysis_workspace"
+```
 
-The public demo exercises the portable core. Full-scale scripts require omitted source data described in `../DATA_AVAILABILITY.md`.
+Coordinate preparation is a separate audited step:
+
+```powershell
+python 01_data_acquisition\scripts\prepare_thames_company_data.py coordinates --project-root "D:\path\to\analysis_workspace"
+```
+
+## Validation
+
+Record provider, years, access date, licence, original checksum, row count and schema mapping. Never edit the source export in place. Continue to stage 02 only when every company can be mapped to the standard contract.
+
+See `docs/DATA_PROVENANCE.md`, `DATA_AVAILABILITY.md` and the source tracker workbook.
