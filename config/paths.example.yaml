@@ -1,12 +1,22 @@
+# Machine-local source catalogue for the historical/raw-data stages.
 # Copy to paths.yaml and replace placeholders. Never commit paths.yaml.
+workspace_root: /path/to/local/analysis_workspace
 raw_edm_root: /path/to/local/raw_or_cleaned_edm
 company_json_root: /path/to/local/company_json
-wwtw_catchments: /path/to/licensed_or_public/wwtw_catchments.gpkg
-hydrogeology: /path/to/licensed/hydrogeology.gpkg
+wwtw_catchments: /path/to/wwtw_catchments.gpkg
+hydrogeology: /path/to/hydrogeology.gpkg
 static_rainfall: /path/to/haduk_grid_climatology
 nimrod_archive: /path/to/nimrod_archive
 land_cover: /path/to/land_cover
 population: /path/to/population
 building_age: /path/to/building_age
 terrain: /path/to/elevation_or_slope
-output_root: outputs/full_run
+treatment_capacity: /path/to/treatment_capacity_tables
+manual_matches: /path/to/matching.txt
+scientific_master: /path/to/scientific_master.csv
+output_root: /path/to/local/full_run_outputs
+provenance_manifest: /path/to/local/provenance_manifest.csv
+
+# The executable core uses config/scientific.example.yaml. This catalogue is
+# retained for the upstream acquisition, GIS extraction and historical audit
+# scripts described in docs/FULL_PIPELINE_RUNBOOK.md.

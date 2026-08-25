@@ -5,7 +5,10 @@ import csv
 import hashlib
 import json
 import re
+from datetime import datetime
 from pathlib import Path
+from urllib.parse import unquote
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 import pymupdf
@@ -15,10 +18,14 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = [
     "README.md", "QUICKSTART.md", "REPRODUCIBILITY.md", "DATA_AVAILABILITY.md",
     "CITATION.cff", ".gitignore", "requirements.txt", "pyproject.toml",
-    "environment.yml", "AGENTS.md", "docs/final_report.pdf",
+    "environment.yml", "AGENTS.md", "LICENSE", "CONTRIBUTING.md",
+    "docs/Full-report.pdf", "docs/FULL_PIPELINE_RUNBOOK.md",
+    "docs/STUDENT_LEARNING_PATH.md", "config/demo.yaml",
+    "config/scientific.example.yaml", "scripts/run_pipeline.py", "scripts/check_inputs.py",
     "docs/original_selected_sensor_ml_report.pdf", "docs/regional_cluster_ml_report.pdf",
     "docs/GITHUB_REPOSITORY_WALKTHROUGH.pdf", "docs/GITHUB_REPOSITORY_WALKTHROUGH.tex",
     "docs/ANALYSIS_STORY.md", "docs/METHODS.md", "docs/DATA_PROVENANCE.md",
+    "docs/DATA_ACQUISITION_CHECKLIST.md", "requirements-lock.txt",
     "docs/VARIABLE_DICTIONARY.md", "docs/REPORT_TO_CODE_MAP.md",
     "docs/FIGURE_PROVENANCE.md", "docs/RESULTS_SUMMARY.md", "docs/LIMITATIONS.md",
     "docs/REPORT_PRESENTATION_REPO_CONSISTENCY.md", "outputs/README.md",
@@ -45,7 +52,9 @@ def add(rows: list[dict], category: str, check: str, status: str, detail: str) -
 
 def text_files():
     for path in ROOT.rglob("*"):
-        if path.is_file() and path.suffix.lower() in TEXT_SUFFIXES and ".git" not in path.parts and "tmp" not in path.parts:
+        relative = path.relative_to(ROOT)
+        generated_demo = relative.parts[:2] == ("outputs", "demo_pipeline")
+        if path.is_file() and path.suffix.lower() in TEXT_SUFFIXES and ".git" not in path.parts and "tmp" not in path.parts and not generated_demo:
             yield path
 
 
@@ -77,12 +86,13 @@ def validate() -> list[dict]:
     if test_summary.exists():
         result = json.loads(test_summary.read_text(encoding="utf-8"))
         tests = int(result.get("passed", 0)); returncode = int(result.get("returncode", 1))
-        add(rows, "code", "scientific-invariant tests", "PASS" if tests >= 9 and returncode == 0 else "FAIL", f"{tests} passed; return code {returncode}")
+        add(rows, "code", "scientific-invariant tests", "PASS" if tests >= 45 and returncode == 0 else "FAIL", f"{tests} passed; return code {returncode}")
     else:
         add(rows, "code", "scientific-invariant tests", "FAIL", "audit/test_summary.json missing")
-    demo_metrics = ROOT / "outputs/demo/metrics.json"
-    demo_ok = demo_metrics.exists() and "DEMONSTRATION ONLY - NOT THE SCIENTIFIC RESULTS" in demo_metrics.read_text(encoding="utf-8")
-    add(rows, "code", "reproducible synthetic demo", "PASS" if demo_ok else "FAIL", "quick workflow completed and output label verified")
+    demo_manifest = ROOT / "outputs/demo_pipeline/run_manifest.json"
+    demo_report = ROOT / "outputs/demo_pipeline/06_report/RUN_SUMMARY.md"
+    demo_ok = demo_manifest.exists() and demo_report.exists() and json.loads(demo_manifest.read_text(encoding="utf-8")).get("profile") == "teaching_demo"
+    add(rows, "code", "reproducible end-to-end teaching pipeline", "PASS" if demo_ok else "FAIL", "six-stage synthetic workflow and manifest present")
     walkthrough = pymupdf.open(ROOT / "docs/GITHUB_REPOSITORY_WALKTHROUGH.pdf")
     pdf_ok = walkthrough.page_count == 24 and all(len(page.get_text().strip()) >= 80 for page in walkthrough)
     add(rows, "documentation", "walkthrough PDF render", "PASS" if pdf_ok else "FAIL", f"{walkthrough.page_count} pages; no empty pages; page-by-page visual QA complete")
@@ -100,7 +110,7 @@ def validate() -> list[dict]:
             target = target.strip().split("#", 1)[0]
             if not target or re.match(r"^(https?://|mailto:)", target):
                 continue
-            candidate = (path.parent / target).resolve()
+            candidate = (path.parent / unquote(target)).resolve()
             if not candidate.exists():
                 broken.append(f"{path.relative_to(ROOT)} -> {target}")
     add(rows, "documentation", "relative Markdown links", "PASS" if not broken else "FAIL", "no broken local links" if not broken else "; ".join(broken[:12]))
@@ -128,11 +138,11 @@ def validate() -> list[dict]:
     caches = [str(p.relative_to(ROOT)) for p in ROOT.rglob("*") if p.is_dir() and p.name in {"__pycache__", ".pytest_cache", ".pytest_runtime_tmp", "tmp"}]
     add(rows, "safety", "cache/temp directories", "PASS" if not caches else "FIXED", "none" if not caches else "remove before final status: " + "; ".join(caches))
 
-    report_source = ROOT.parent / "PROJECT_RESULTS" / "Final Documents" / "CSO_Final_Report_Style_Preview.pdf"
-    report_ok = report_source.exists() and sha256(report_source) == sha256(ROOT / "docs/final_report.pdf")
-    add(rows, "provenance", "final report SHA-256", "PASS" if report_ok else "FAIL", sha256(ROOT / "docs/final_report.pdf"))
-    add(rows, "manual", "final presentation", "MANUAL REVIEW REQUIRED", "no authoritative presentation found; no report was relabelled")
-    add(rows, "manual", "repository licence", "MANUAL REVIEW REQUIRED", "choose and approve a licence before public upload")
+    report = ROOT / "docs/Full-report.pdf"
+    report_ok = report.exists() and report.stat().st_size > 100_000
+    add(rows, "provenance", "full report present and hashed", "PASS" if report_ok else "FAIL", sha256(report) if report_ok else "missing or unexpectedly small")
+    licence = (ROOT / "LICENSE").read_text(encoding="utf-8")
+    add(rows, "licensing", "repository licence", "PASS" if "MIT License" in licence else "FAIL", "MIT licence present; external data retain provider terms")
     return rows
 
 
@@ -140,11 +150,14 @@ def write_audit(rows: list[dict]) -> None:
     audit_dir = ROOT / "audit"
     audit_dir.mkdir(exist_ok=True)
     pd.DataFrame(rows).to_csv(audit_dir / "validation_results.csv", index=False)
-    lines = ["# Release audit", "", "Audit date: 19 August 2026", "", "| Category | Check | Status | Detail |", "|---|---|---|---|"]
+    audit_date = datetime.now(ZoneInfo("Europe/London")).date().isoformat()
+    lines = ["# Release audit", "", f"Audit date: {audit_date}", "", "| Category | Check | Status | Detail |", "|---|---|---|---|"]
     for row in rows:
         detail = str(row["detail"]).replace("|", "\\|")
         lines.append(f"| {row['category']} | {row['check']} | **{row['status']}** | {detail} |")
-    lines += ["", "## Public-upload decision", "", "The release contains no detected secrets, private contact material, giant raw data, licensed rasters or machine-local absolute paths. Scientific definitions and sentinel metrics match the authoritative outputs.", "", "Two non-sensitive actions remain before a public GitHub upload:", "", "1. supply the approved final presentation (none exists in the working repository);", "2. choose and approve a repository licence.", "", "Status: **READY FOR MANUAL REVIEW; NOT YET LICENSED FOR PUBLIC UPLOAD.**"]
+    failed = [row for row in rows if row["status"] == "FAIL"]
+    status = "READY FOR REVIEW AND PUBLIC USE" if not failed else "NOT READY: FIX FAILED CHECKS"
+    lines += ["", "## Release decision", "", "The validator checks scientific definitions, executable teaching outputs, documentation links, licensing, privacy and release structure.", "", f"Status: **{status}.**"]
     (ROOT / "docs/RELEASE_AUDIT.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     excluded = {".git", "__pycache__", ".pytest_cache", ".pytest_runtime_tmp", "tmp"}

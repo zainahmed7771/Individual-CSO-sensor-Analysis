@@ -1,37 +1,47 @@
-# Quickstart
+# Quickstart: obtain a complete successful run
 
-## 1. Clone and enter the repository
-```bash
-git clone <YOUR-REPOSITORY-URL>
-cd GITHUB_RELEASE_CSO_SPATIAL_DRIVERS
+All commands below must be executed from the repository root—the folder containing `pyproject.toml`.
+
+## Windows PowerShell
+
+```powershell
+git clone https://github.com/zainahmed7771/Individual-CSO-sensor-Analysis.git
+cd Individual-CSO-sensor-Analysis
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e ".[test]"
+python scripts\check_inputs.py --config config\demo.yaml
+python scripts\run_pipeline.py --config config\demo.yaml
+pytest -q
 ```
 
-## 2. Create an isolated environment
+## macOS/Linux
+
 ```bash
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# macOS/Linux
+git clone https://github.com/zainahmed7771/Individual-CSO-sensor-Analysis.git
+cd Individual-CSO-sensor-Analysis
+python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install -e .[test]
-```
-
-## 3. Create local configuration
-Copy `config/paths.example.yaml` to `config/paths.yaml` and replace placeholders only if running the full-data workflow. `config/paths.yaml` is ignored by Git.
-
-## 4. Verify the release
-```bash
+python -m pip install -e '.[test]'
+python scripts/check_inputs.py --config config/demo.yaml
+python scripts/run_pipeline.py --config config/demo.yaml
 pytest -q
-python scripts/run_reproducible_demo.py
 ```
 
-Demo outputs are written to `outputs/demo/` and are labelled **DEMONSTRATION ONLY - NOT THE SCIENTIFIC RESULTS**.
+Successful completion prints `PIPELINE COMPLETED`. Inspect:
 
-## 5. Inspect scientific results
-- `outputs/headline_tables/final_ml_scorecard.csv`
-- `docs/original_selected_sensor_ml_report.pdf`
-- `docs/regional_cluster_ml_report.pdf`
-- `docs/GITHUB_REPOSITORY_WALKTHROUGH.pdf`
+```text
+outputs/demo_pipeline/
+|-- 01_cleaning/clean_events.csv
+|-- 02_tail_fitting/sensor_outcomes.csv
+|-- 03_master/scientific_master.csv
+|-- 04_univariate/univariate_results.csv
+|-- 05_machine_learning/model_scorecard.csv
+|-- 05_machine_learning/locked_test_predictions.csv
+|-- 06_report/RUN_SUMMARY.md
+`-- run_manifest.json
+```
 
-Full-data commands are documented in `REPRODUCIBILITY.md`; they require sources that are intentionally not distributed.
+These are synthetic teaching outputs. For authorised scientific inputs, continue with [`docs/FULL_PIPELINE_RUNBOOK.md`](docs/FULL_PIPELINE_RUNBOOK.md).

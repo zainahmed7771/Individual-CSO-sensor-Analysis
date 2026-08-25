@@ -1,0 +1,13 @@
+{
+  "radius_tiers_m": [1000, 2000, 3000],
+  "max_radius_m": 3000,
+  "distance_discrepancy_tolerance_m": 1.0,
+  "near_tie_gap_m": 100.0,
+  "same_company_required": true,
+  "accepted_pair_flag_field": "accepted_place_name_match",
+  "accepted_pair_flag_value": true,
+  "crs": "EPSG:27700",
+  "review_priority_order": ["critical", "high", "medium", "low"],
+  "selection_method": "nearest_existing_accepted_name_match_within_radius",
+  "scientific_warning": "Selection uses proximity among already accepted name-matched candidates; it does not prove hydraulic connectivity."
+}

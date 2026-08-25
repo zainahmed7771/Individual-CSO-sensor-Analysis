@@ -1,3 +1,5 @@
-# Licence decision required
+# Licence decision resolved
 
-No explicit approved software/data licence was found in the working repository. Select a licence before public release and confirm that it is compatible with UCL requirements and every redistributed dataset/figure. Until then, this folder is ready for manual review but must not be described as open source.
+UCL approval and the absence of proprietary repository-authored software were confirmed by the project author. Repository-authored software and documentation are released under the MIT licence in `LICENSE`.
+
+This historically named file is retained so older references do not break. It is not an outstanding action. External datasets and third-party materials remain governed by their own terms and are not relicensed by MIT.

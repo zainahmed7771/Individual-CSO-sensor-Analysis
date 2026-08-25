@@ -1,2 +1,9 @@
-from cso_spatial_drivers.cleaning.events import clean_events
-# Portable entry point is demonstrated in run_reproducible_demo.py. Full provider ingestion requires DATA_AVAILABILITY.md inputs.
+"""Run the event-cleaning stage of the configured pipeline."""
+from __future__ import annotations
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from cso_spatial_drivers.cli import main
+if __name__ == "__main__":
+    raise SystemExit(main([*sys.argv[1:], "--through", "clean"]))

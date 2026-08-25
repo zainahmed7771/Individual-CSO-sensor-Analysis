@@ -12,7 +12,7 @@ from shapely.geometry import Point, Polygon
 SCRIPT_PATH = (
     Path(__file__).resolve().parents[1]
     / "scripts"
-    / "03_assign_sensors_to_catchments.py"
+    / "assign_sensors_to_catchments.py"
 )
 SPEC = importlib.util.spec_from_file_location("assign_catchments", SCRIPT_PATH)
 assert SPEC is not None and SPEC.loader is not None

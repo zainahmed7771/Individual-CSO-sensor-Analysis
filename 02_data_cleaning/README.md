@@ -1,21 +1,21 @@
-# 02 Data Cleaning
+# 02 – Event cleaning and sensor identity
 
-## Scientific question
-How are incompatible provider records turned into one event contract?
+**Question:** how are heterogeneous provider rows converted into valid comparable events?
 
-## Inputs
-Provider event tables with permit, location and timestamps.
+The maintained core command is:
 
-## Code to run
-Portable cleaning functions and authoritative preparation scripts.
+```powershell
+python scripts\01_build_event_master.py --config config\demo.yaml
+```
 
-## Outputs
-One row per valid event with stable sensor UID and duration minutes.
+Replace the configuration with `config/scientific.yaml` for authorised standardised inputs. Output: `<output_root>/01_cleaning/clean_events.csv`.
 
-## QC and validation
-End >= start, deduplication, finite non-negative duration and schema checks.
+The cleaning contract normalises company/permit strings, parses UTC timestamps, recomputes duration, rejects missing/invalid chronology and de-duplicates identical company–permit–timestamp events. `sensor_uid` is `company::permit_number`.
 
-## Connection to the next stage
-Clean events feed tail fitting and observed duration/frequency outcomes.
+The historical `scripts/prepare_sensor_master.py` is a later all-sensor assembly step that consumes completed fit/bootstrap/location products; despite its historical filename it is not the maintained event-cleaning entry point.
 
-The public demo exercises the portable core. Full-scale scripts require omitted source data described in `../DATA_AVAILABILITY.md`.
+Validation tests:
+
+```powershell
+pytest tests\test_duration_calculation.py 02_data_cleaning\tests\test_event_contracts.py -q
+```

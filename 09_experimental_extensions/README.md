@@ -1,21 +1,7 @@
-# 09 Experimental Extensions
+# 09 – Experimental extensions
 
-## Scientific question
-Which later diagnostics test why skill is modest?
+This directory contains later diagnostics rather than the primary submitted workflow. It includes univariate predictive screening and a hierarchical benchmark whose full mixed-effects specification was singular.
 
-## Inputs
-Current master, shared splits, regional groups and beta/lambda fits.
+Use these outputs to design follow-up research, not to silently replace the primary models. Any extension must preserve original splits, outcome definitions, beta bounds and leakage exclusions, and must report convergence or failure honestly.
 
-## Code to run
-Univariate predictive screening, bounded-beta diagnostic and hierarchical benchmark.
-
-## Outputs
-Standalone-predictor rankings and documented MixedLM failure.
-
-## QC and validation
-Historical split identity, boundary handling and honest convergence reporting.
-
-## Connection to the next stage
-Guides the next event-level/hydraulic research design.
-
-The public demo exercises the portable core. Full-scale scripts require omitted source data described in `../DATA_AVAILABILITY.md`.
+The primary executable path ends at stage 08. Promote an extension only through a documented methods change, new tests and a separate result comparison.

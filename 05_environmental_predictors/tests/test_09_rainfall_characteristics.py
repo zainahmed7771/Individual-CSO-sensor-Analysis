@@ -12,7 +12,7 @@ from affine import Affine
 from shapely.geometry import box
 
 
-SCRIPT = Path(__file__).parents[1] / "scripts" / "09_build_wwtw_rainfall_characteristics.py"
+SCRIPT = Path(__file__).parents[1] / "scripts" / "build_static_rainfall.py"
 SPEC = importlib.util.spec_from_file_location("rainfall_release", SCRIPT)
 module = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader

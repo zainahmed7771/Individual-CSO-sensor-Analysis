@@ -1,21 +1,13 @@
-# 06 Univariate Analysis
+# 06 – Univariate analysis
 
-## Scientific question
-What association does each variable show on its own?
+**Question:** what association does each external variable show with each outcome when considered separately?
 
-## Inputs
-Target-specific eligible WWTWs and external predictors.
+```powershell
+python scripts\05_run_univariate_analysis.py --config config\demo.yaml
+```
 
-## Code to run
-HC3 log-outcome regressions, correlations and FDR correction.
+Output: `<output_root>/04_univariate/univariate_results.csv`.
 
-## Outputs
-Effect/CI/p/q tables and forest/correlation figures.
+The maintained runner fits positive outcomes on the log scale using HC3 robust uncertainty and applies Benjamini–Hochberg FDR correction within outcome. A slope is an unadjusted association, not a causal effect and not automatically a multivariable feature-selection decision.
 
-## QC and validation
-Broad/strict cohorts, multiplicity and diagnostic checks.
-
-## Connection to the next stage
-Associational evidence informs but does not select the ML test result.
-
-The public demo exercises the portable core. Full-scale scripts require omitted source data described in `../DATA_AVAILABILITY.md`.
+The preserved scientific tables and figures are under `results/` and `outputs/headline_*`. Broad/strict cohort rules and meaningful predictor increments are documented in `docs/METHODS.md` and `docs/VARIABLE_DICTIONARY.md`.

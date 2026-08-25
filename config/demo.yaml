@@ -1,0 +1,18 @@
+profile: teaching_demo
+seed: 20260819
+
+paths:
+  events: data/sample/synthetic_events.csv
+  assignments: data/sample/synthetic_assignments.csv
+  predictors: data/sample/synthetic_predictors.csv
+  monitoring_exposure: data/sample/synthetic_monitoring_exposure.csv
+  output_root: outputs/demo_pipeline
+
+analysis:
+  tail_threshold_minutes: 240
+  tail_rule: strictly_greater_than
+
+predictors:
+  - population_density_km2
+  - rain_mean_annual_mm
+  - catchment_area_km2

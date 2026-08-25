@@ -5,5 +5,7 @@ type: software
 authors:
   - family-names: Ahmed
     given-names: Zain
-version: 1.0.0
-date-released: 2026-08-19
+version: 1.1.0
+date-released: 2026-08-26
+license: MIT
+repository-code: "https://github.com/zainahmed7771/Individual-CSO-sensor-Analysis"

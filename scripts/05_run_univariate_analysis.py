@@ -1,2 +1,9 @@
-from cso_spatial_drivers.statistics.univariate import fit_log_outcome
-# Authoritative full-data analysis is in 06_univariate_analysis/scripts/.
+"""Run the configured workflow through HC3/FDR univariate analysis."""
+from __future__ import annotations
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from cso_spatial_drivers.cli import main
+if __name__ == "__main__":
+    raise SystemExit(main([*sys.argv[1:], "--through", "univariate"]))

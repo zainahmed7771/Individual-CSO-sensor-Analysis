@@ -3,7 +3,7 @@ GITHUB RELEASE - FINAL COMPLETION REPORT
 ============================================================
 
 RELEASE FOLDER
-Path: GITHUB_RELEASE_CSO_SPATIAL_DRIVERS/
+Path: repository root
 Total files (excluding .git): 255
 Total size: 19,890,268 bytes (18.97 MiB)
 
@@ -40,7 +40,7 @@ Headline tables: 5 CSV files
 REPRODUCIBILITY
 Demo: PASS - labelled DEMONSTRATION ONLY - NOT THE SCIENTIFIC RESULTS
 Tests: PASS
-Number of tests: 9
+Number of tests: 45
 Environment file: environment.yml
 Python version: 3.12.10
 
@@ -51,20 +51,17 @@ Large-file scan: PASS - no file over 50 MB
 Raw-data exclusion: PASS
 Machine-path scan: PASS
 Cache/temp scan: PASS
-Manual review items: approved presentation missing; repository licence undecided
+Manual review items: approved presentation not included; external source provenance must be completed for a new raw-data scientific reconstruction
 
 GIT
-Initialized: YES, only inside the release folder
-Current branch: master (upload instructions rename it to main before first push)
-Remote configured: NO
-GitHub CLI detected: NO
-Expected remote configured: NO
+Initialized: YES
+Release branch: codex/end-to-end-reproduction
+Remote: https://github.com/zainahmed7771/Individual-CSO-sensor-Analysis.git
 
 MAIN FILES FOR PROFESSOR
 README: README.md
 Repository walkthrough PDF: docs/GITHUB_REPOSITORY_WALKTHROUGH.pdf
 
-GITHUB RELEASE FOLDER COMPLETE
-READY FOR MANUAL REVIEW
-NOT YET LICENSED OR READY FOR PUBLIC GITHUB UPLOAD
+SUPERSEDED SNAPSHOT: current machine-readable status is audit/validation_results.csv
+MIT LICENCE CONFIRMED; EXTERNAL DATA RETAIN PROVIDER TERMS
 ============================================================

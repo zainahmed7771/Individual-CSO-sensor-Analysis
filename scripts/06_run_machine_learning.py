@@ -1,2 +1,9 @@
-# See 07_machine_learning/README.md for the original selected-sensor and regional-cluster workflows.
-raise SystemExit('Full ML requires omitted scientific masters; run_reproducible_demo.py is public and self-contained.')
+"""Run the configured workflow through four locked-test teaching/core models."""
+from __future__ import annotations
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from cso_spatial_drivers.cli import main
+if __name__ == "__main__":
+    raise SystemExit(main([*sys.argv[1:], "--through", "machine_learning"]))

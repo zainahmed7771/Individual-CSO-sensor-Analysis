@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from build_all_individual_cso_beta_maps import (
+from cso_spatial_drivers.spatial.identifiers import (
     alphanumeric_permit,
     match_company,
     normalize_permit,
