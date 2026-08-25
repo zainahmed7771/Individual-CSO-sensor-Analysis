@@ -122,6 +122,8 @@ The public test suite protects the scientific invariants that are easiest to bre
 
 Raw company EDM records, large NIMROD archives, licensed spatial products, correspondence and machine-local configuration are intentionally excluded. Small synthetic examples, schemas, authoritative headline tables, model metrics and final figures are included. See `DATA_AVAILABILITY.md` and `docs/DATA_PROVENANCE.md`.
 
+For a consolidated guide to the underlying data sources, see `Sewer EIR Coverage Tracker (Visual).xlsx`. The workbook identifies the datasets used across the project and points to where the relevant data can be accessed or downloaded from their original sources.
+
 ## Limitations
 
 Catchment boundaries are proxies for sewer systems; annual/static predictors do not encode individual storms; monitoring and operating practices differ by company; beta and lambda are jointly fitted; regional averaging can create apparent predictability by shrinking extremes. Results are predictive/associational and should not be interpreted causally.
